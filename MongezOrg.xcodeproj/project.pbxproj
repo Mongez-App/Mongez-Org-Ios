@@ -1,0 +1,603 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5A3868A1302FB585007289C0 /* MongezOrgApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868A0302FB585007289C0 /* MongezOrgApp.swift */; };
+		5A3868A3302FB585007289C0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868A2302FB585007289C0 /* ContentView.swift */; };
+		5A3868A5302FB587007289C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A3868A4302FB587007289C0 /* Assets.xcassets */; };
+		5A3868A8302FB587007289C0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A3868A7302FB587007289C0 /* Preview Assets.xcassets */; };
+		5A3868AA302FB587007289C0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868A9302FB587007289C0 /* Persistence.swift */; };
+		5A3868AD302FB587007289C0 /* MongezOrg.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868AB302FB587007289C0 /* MongezOrg.xcdatamodeld */; };
+		5A3868B7302FB587007289C0 /* MongezOrgTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868B6302FB587007289C0 /* MongezOrgTests.swift */; };
+		5A3868C1302FB587007289C0 /* MongezOrgUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868C0302FB587007289C0 /* MongezOrgUITests.swift */; };
+		5A3868C3302FB587007289C0 /* MongezOrgUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868C2302FB587007289C0 /* MongezOrgUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5A3868B3302FB587007289C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A386895302FB585007289C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A38689C302FB585007289C0;
+			remoteInfo = MongezOrg;
+		};
+		5A3868BD302FB587007289C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A386895302FB585007289C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A38689C302FB585007289C0;
+			remoteInfo = MongezOrg;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5A38689D302FB585007289C0 /* MongezOrg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MongezOrg.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A3868A0302FB585007289C0 /* MongezOrgApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongezOrgApp.swift; sourceTree = "<group>"; };
+		5A3868A2302FB585007289C0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5A3868A4302FB587007289C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5A3868A7302FB587007289C0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5A3868A9302FB587007289C0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		5A3868AC302FB587007289C0 /* MongezOrg.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MongezOrg.xcdatamodel; sourceTree = "<group>"; };
+		5A3868B2302FB587007289C0 /* MongezOrgTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MongezOrgTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A3868B6302FB587007289C0 /* MongezOrgTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongezOrgTests.swift; sourceTree = "<group>"; };
+		5A3868BC302FB587007289C0 /* MongezOrgUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MongezOrgUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A3868C0302FB587007289C0 /* MongezOrgUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongezOrgUITests.swift; sourceTree = "<group>"; };
+		5A3868C2302FB587007289C0 /* MongezOrgUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongezOrgUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5A38689A302FB585007289C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A3868AF302FB587007289C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A3868B9302FB587007289C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5A386894302FB585007289C0 = {
+			isa = PBXGroup;
+			children = (
+				5A38689F302FB585007289C0 /* MongezOrg */,
+				5A3868B5302FB587007289C0 /* MongezOrgTests */,
+				5A3868BF302FB587007289C0 /* MongezOrgUITests */,
+				5A38689E302FB585007289C0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5A38689E302FB585007289C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A38689D302FB585007289C0 /* MongezOrg.app */,
+				5A3868B2302FB587007289C0 /* MongezOrgTests.xctest */,
+				5A3868BC302FB587007289C0 /* MongezOrgUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5A38689F302FB585007289C0 /* MongezOrg */ = {
+			isa = PBXGroup;
+			children = (
+				5A3868A0302FB585007289C0 /* MongezOrgApp.swift */,
+				5A3868A2302FB585007289C0 /* ContentView.swift */,
+				5A3868A4302FB587007289C0 /* Assets.xcassets */,
+				5A3868A9302FB587007289C0 /* Persistence.swift */,
+				5A3868AB302FB587007289C0 /* MongezOrg.xcdatamodeld */,
+				5A3868A6302FB587007289C0 /* Preview Content */,
+			);
+			path = MongezOrg;
+			sourceTree = "<group>";
+		};
+		5A3868A6302FB587007289C0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				5A3868A7302FB587007289C0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5A3868B5302FB587007289C0 /* MongezOrgTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A3868B6302FB587007289C0 /* MongezOrgTests.swift */,
+			);
+			path = MongezOrgTests;
+			sourceTree = "<group>";
+		};
+		5A3868BF302FB587007289C0 /* MongezOrgUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5A3868C0302FB587007289C0 /* MongezOrgUITests.swift */,
+				5A3868C2302FB587007289C0 /* MongezOrgUITestsLaunchTests.swift */,
+			);
+			path = MongezOrgUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5A38689C302FB585007289C0 /* MongezOrg */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A3868C6302FB587007289C0 /* Build configuration list for PBXNativeTarget "MongezOrg" */;
+			buildPhases = (
+				5A386899302FB585007289C0 /* Sources */,
+				5A38689A302FB585007289C0 /* Frameworks */,
+				5A38689B302FB585007289C0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MongezOrg;
+			productName = MongezOrg;
+			productReference = 5A38689D302FB585007289C0 /* MongezOrg.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5A3868B1302FB587007289C0 /* MongezOrgTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A3868C9302FB587007289C0 /* Build configuration list for PBXNativeTarget "MongezOrgTests" */;
+			buildPhases = (
+				5A3868AE302FB587007289C0 /* Sources */,
+				5A3868AF302FB587007289C0 /* Frameworks */,
+				5A3868B0302FB587007289C0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5A3868B4302FB587007289C0 /* PBXTargetDependency */,
+			);
+			name = MongezOrgTests;
+			productName = MongezOrgTests;
+			productReference = 5A3868B2302FB587007289C0 /* MongezOrgTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5A3868BB302FB587007289C0 /* MongezOrgUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A3868CC302FB587007289C0 /* Build configuration list for PBXNativeTarget "MongezOrgUITests" */;
+			buildPhases = (
+				5A3868B8302FB587007289C0 /* Sources */,
+				5A3868B9302FB587007289C0 /* Frameworks */,
+				5A3868BA302FB587007289C0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5A3868BE302FB587007289C0 /* PBXTargetDependency */,
+			);
+			name = MongezOrgUITests;
+			productName = MongezOrgUITests;
+			productReference = 5A3868BC302FB587007289C0 /* MongezOrgUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5A386895302FB585007289C0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					5A38689C302FB585007289C0 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					5A3868B1302FB587007289C0 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 5A38689C302FB585007289C0;
+					};
+					5A3868BB302FB587007289C0 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 5A38689C302FB585007289C0;
+					};
+				};
+			};
+			buildConfigurationList = 5A386898302FB585007289C0 /* Build configuration list for PBXProject "MongezOrg" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5A386894302FB585007289C0;
+			productRefGroup = 5A38689E302FB585007289C0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5A38689C302FB585007289C0 /* MongezOrg */,
+				5A3868B1302FB587007289C0 /* MongezOrgTests */,
+				5A3868BB302FB587007289C0 /* MongezOrgUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5A38689B302FB585007289C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A3868A8302FB587007289C0 /* Preview Assets.xcassets in Resources */,
+				5A3868A5302FB587007289C0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A3868B0302FB587007289C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A3868BA302FB587007289C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5A386899302FB585007289C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A3868AA302FB587007289C0 /* Persistence.swift in Sources */,
+				5A3868A3302FB585007289C0 /* ContentView.swift in Sources */,
+				5A3868AD302FB587007289C0 /* MongezOrg.xcdatamodeld in Sources */,
+				5A3868A1302FB585007289C0 /* MongezOrgApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A3868AE302FB587007289C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A3868B7302FB587007289C0 /* MongezOrgTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A3868B8302FB587007289C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A3868C1302FB587007289C0 /* MongezOrgUITests.swift in Sources */,
+				5A3868C3302FB587007289C0 /* MongezOrgUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5A3868B4302FB587007289C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5A38689C302FB585007289C0 /* MongezOrg */;
+			targetProxy = 5A3868B3302FB587007289C0 /* PBXContainerItemProxy */;
+		};
+		5A3868BE302FB587007289C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5A38689C302FB585007289C0 /* MongezOrg */;
+			targetProxy = 5A3868BD302FB587007289C0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		5A3868C4302FB587007289C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5A3868C5302FB587007289C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5A3868C7302FB587007289C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MongezOrg/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = iti.MongezOrg;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5A3868C8302FB587007289C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MongezOrg/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = iti.MongezOrg;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5A3868CA302FB587007289C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = iti.MongezOrgTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MongezOrg.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MongezOrg";
+			};
+			name = Debug;
+		};
+		5A3868CB302FB587007289C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = iti.MongezOrgTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MongezOrg.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MongezOrg";
+			};
+			name = Release;
+		};
+		5A3868CD302FB587007289C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = iti.MongezOrgUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MongezOrg;
+			};
+			name = Debug;
+		};
+		5A3868CE302FB587007289C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = iti.MongezOrgUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MongezOrg;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5A386898302FB585007289C0 /* Build configuration list for PBXProject "MongezOrg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A3868C4302FB587007289C0 /* Debug */,
+				5A3868C5302FB587007289C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A3868C6302FB587007289C0 /* Build configuration list for PBXNativeTarget "MongezOrg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A3868C7302FB587007289C0 /* Debug */,
+				5A3868C8302FB587007289C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A3868C9302FB587007289C0 /* Build configuration list for PBXNativeTarget "MongezOrgTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A3868CA302FB587007289C0 /* Debug */,
+				5A3868CB302FB587007289C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A3868CC302FB587007289C0 /* Build configuration list for PBXNativeTarget "MongezOrgUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A3868CD302FB587007289C0 /* Debug */,
+				5A3868CE302FB587007289C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5A3868AB302FB587007289C0 /* MongezOrg.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5A3868AC302FB587007289C0 /* MongezOrg.xcdatamodel */,
+			);
+			currentVersion = 5A3868AC302FB587007289C0 /* MongezOrg.xcdatamodel */;
+			path = MongezOrg.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 5A386895302FB585007289C0 /* Project object */;
+}
