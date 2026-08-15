@@ -27,6 +27,12 @@ public struct RegistrationWizardView: View {
                 OrganizationDetailsView(viewModel: viewModel)
             case 3:
                 ContactAndLocationView(viewModel: viewModel)
+            case 4:
+                UnderReviewView(
+                    currentStep: viewModel.currentStep,
+                    totalSteps: viewModel.totalSteps,
+                    onDoneTap: onRegistrationComplete
+                )
             case 5:
                 VerifiedView(
                     currentStep: viewModel.currentStep,
@@ -39,8 +45,4 @@ public struct RegistrationWizardView: View {
         }
         .navigationBarHidden(true)
     }
-}
-
-#Preview {
-    RegistrationWizardView(viewModel: AuthViewModel(useCase: AuthUseCaseImpl(repository: OrganizationAuthRepositoryImpl(networkService: OrganizationAuthNetworkServiceImpl()))))
 }

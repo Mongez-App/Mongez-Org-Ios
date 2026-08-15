@@ -6,20 +6,17 @@ import MapKit
 @MainActor
 public final class AuthViewModel: ObservableObject {
 
-    // MARK: - Step 1: Account
     @Published public var orgName = ""
     @Published public var email = ""
     @Published public var password = ""
     @Published public var confirmPassword = ""
 
-    // MARK: - Step 2: Organization Details
     @Published public var industryField = ""
     @Published public var orgDescription = ""
     @Published public var targetAudience = ""
     @Published public var servicesProvided: [String] = []
     @Published public var newService = ""
 
-    // MARK: - Step 3: Contact & Location
     @Published public var contactEmail = ""
     @Published public var phone = ""
     @Published public var website = ""
@@ -28,14 +25,12 @@ public final class AuthViewModel: ObservableObject {
     @Published public var documentURL = ""
     @Published public var documentURLs: [String] = []
 
-    // MARK: - Map
     @Published public var mapRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 30.0444, longitude: 31.2357),
         span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     )
     @Published public var selectedCoordinate: CLLocationCoordinate2D?
 
-    // MARK: - UI State
     @Published public var isLoading = false
     @Published public var errorMessage: String?
     @Published public var currentStep = 1
@@ -65,8 +60,6 @@ public final class AuthViewModel: ObservableObject {
         self.useCase = useCase
     }
 
-    // MARK: - Navigation
-
     public func nextStep() {
         guard validateCurrentStep() else { return }
         guard currentStep < totalSteps else { return }
@@ -83,8 +76,6 @@ public final class AuthViewModel: ObservableObject {
             currentStep -= 1
         }
     }
-
-    // MARK: - Actions
 
     public func login() {
         guard validateLogin() else { return }
@@ -116,7 +107,7 @@ public final class AuthViewModel: ObservableObject {
                 let response = try await self.useCase.register(request: self.buildRegisterRequest())
                 self.authenticatedOrganization = response.organization
                 withAnimation(.easeInOut(duration: 0.3)) {
-                    self.currentStep = 5
+                    self.currentStep = 4
                 }
             } catch {
                 self.errorMessage = error.localizedDescription
@@ -154,8 +145,6 @@ public final class AuthViewModel: ObservableObject {
         guard servicesProvided.indices.contains(index) else { return }
         servicesProvided.remove(at: index)
     }
-
-    // MARK: - Validation
 
     public func isValidEmail(_ email: String) -> Bool {
         let pattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -222,8 +211,6 @@ public final class AuthViewModel: ObservableObject {
         }
         return true
     }
-
-    // MARK: - Helpers
 
     private func buildRegisterRequest() -> RegisterRequest {
         RegisterRequest(
