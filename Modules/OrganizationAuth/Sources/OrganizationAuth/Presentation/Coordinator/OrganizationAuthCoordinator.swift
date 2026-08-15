@@ -66,14 +66,14 @@ public class OrganizationAuthCoordinator: ObservableObject {
 }
 
 public struct OrganizationAuthCoordinatorView: View {
-    @StateObject private var coordinator: OrganizationAuthCoordinator
+    @ObservedObject private var coordinator: OrganizationAuthCoordinator
     private let dashboardContent: () -> AnyView
 
     public init(
         coordinator: OrganizationAuthCoordinator,
         dashboardContent: @escaping () -> AnyView
     ) {
-        _coordinator = StateObject(wrappedValue: coordinator)
+        self.coordinator = coordinator
         self.dashboardContent = dashboardContent
     }
 

@@ -10,19 +10,20 @@ public final class OrganizationAuthRepositoryImpl: OrganizationAuthRepository {
 
     public func login(idToken: String, request: LoginRequest) async throws -> AuthResponse {
         let response = try await networkService.login(idToken: idToken, request: request)
-        persistSession(response: response)
+        persistSession(idToken: idToken, response: response)
         return response
     }
 
     public func register(idToken: String, request: RegisterRequest) async throws -> AuthResponse {
         let response = try await networkService.register(idToken: idToken, request: request)
-        persistSession(response: response)
+        persistSession(idToken: idToken, response: response)
         return response
     }
 
-    private func persistSession(response: AuthResponse) {
+    private func persistSession(idToken: String, response: AuthResponse) {
         let uid = response.data.uid
         keychain.saveToken(uid)
         UserDefaults.standard.set(uid, forKey: "current_user_id")
+        UserDefaults.standard.set(idToken, forKey: "main_token")
     }
 }

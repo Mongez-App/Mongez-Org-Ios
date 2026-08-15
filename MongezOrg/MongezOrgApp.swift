@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import Courses
 import OrganizationAuth
 import FirebaseCore
 
 @main
 struct MongezOrgApp: App {
     let persistenceController = PersistenceController.shared
+    @StateObject var appCoordinator = AppCoordinator()
     
-    private let coordinator: OrganizationAuthCoordinator
+    private let authCoordinator: OrganizationAuthCoordinator
     
     init() {
         FirebaseApp.configure()
@@ -21,14 +23,14 @@ struct MongezOrgApp: App {
         let networkService = OrganizationAuthNetworkServiceImpl()
         let repository = OrganizationAuthRepositoryImpl(networkService: networkService)
         let useCase = AuthUseCaseImpl(repository: repository)
-        self.coordinator = OrganizationAuthCoordinator(useCase: useCase)
+        self.authCoordinator = OrganizationAuthCoordinator(useCase: useCase)
     }
 
     var body: some Scene {
         WindowGroup {
             OrganizationAuthCoordinatorView(
-                coordinator: coordinator,
-                dashboardContent: { AnyView(ContentView()) }
+                coordinator: authCoordinator,
+                dashboardContent: { AnyView(AppCoordinatorView(coordinator: appCoordinator)) }
             )
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
