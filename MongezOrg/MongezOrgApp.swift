@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import Courses
 
 @main
 struct MongezOrgApp: App {
     let persistenceController = PersistenceController.shared
+    @StateObject var appCoordinator = AppCoordinator()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppCoordinatorView(coordinator: appCoordinator)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
