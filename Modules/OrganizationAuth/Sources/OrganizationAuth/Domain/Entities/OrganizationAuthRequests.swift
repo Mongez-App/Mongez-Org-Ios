@@ -11,12 +11,10 @@ public struct LoginRequest: Codable {
 }
 
 public struct RegisterOrganizationRequest: Codable {
-    // Step 1: Account
     public var email: String = ""
     public var password: String = ""
     
-    // Step 2: Basic Info
-    public var organizationName: String = "" // Added organization name as part of basic info
+    public var organizationName: String = "" 
     public var industryField: String = ""
     public var description: String = ""
     

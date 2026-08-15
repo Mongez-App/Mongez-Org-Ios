@@ -18,12 +18,10 @@ public struct OrganizationProfile: Codable, Identifiable {
     public let industryField: String
     public let description: String?
     
-    // Services & Audience
     public let targetAudience: String
     public let servicesProvided: [String]
     public let numberOfMembers: String
     
-    // Contact & Location
     public let contactEmail: String
     public let phoneNumber: String
     public let websiteURL: String?
