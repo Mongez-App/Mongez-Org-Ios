@@ -18,6 +18,7 @@ public class TeamCoursesCoordinator: Coordinator, ObservableObject {
     
     public let teamId: String
     public let organizationId: String
+    public var onFinish: (() -> Void)?
     
     public init(teamId: String, organizationId: String) {
         self.teamId = teamId

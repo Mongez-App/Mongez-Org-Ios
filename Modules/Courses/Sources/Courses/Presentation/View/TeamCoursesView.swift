@@ -24,7 +24,7 @@ public struct TeamCoursesView: View {
     public var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: AppTheme.Spacing.small) {
-                Button(action: { /* coordinator.pop() or back action */ }) {
+                Button(action: { coordinator.onFinish?() }) {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 24, weight: .medium))
                         .foregroundColor(AppTheme.Colors.purple200)

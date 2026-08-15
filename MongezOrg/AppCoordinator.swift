@@ -11,6 +11,7 @@ import SwiftUI
 import Common
 import Swinject
 import Courses
+import OrganizationAuth
 
 public enum AppState {
     case splash
@@ -29,20 +30,34 @@ public final class AppCoordinator: ObservableObject, Coordinator {
         let container = Container()
         TeamCoursesAssembly().assemble(container: container)
         
+        container.register(OrganizationAuthRepository.self) { _ in
+            let networkService = OrganizationAuthNetworkServiceImpl()
+            return OrganizationAuthRepositoryImpl(networkService: networkService)
+        }
+        
+        container.register(AuthUseCase.self) { resolver in
+            AuthUseCaseImpl(repository: resolver.resolve(OrganizationAuthRepository.self)!)
+        }
+        
         return container
     }()
 
     @Published public var state: AppState = .splash
-    // @Published public var authCoordinator: AuthCoordinator?
+    @Published public var authCoordinator: OrganizationAuthCoordinator?
     // @Published public var dashboardCoordinator: DashboardCoordinator?
     @Published public var teamCoursesCoordinator: TeamCoursesCoordinator?
+    @Published public var selectedTab: AppTab = .dashboard
     
     public init() {
         setupLogoutListener()
     }
     
     public func finishSplash() {
-        startTeamCourses(teamId: "3448cf6e-3811-4eee-8548-bd9d43748589", organizationId: "org22")
+        if UserDefaults.standard.string(forKey: "current_user_id") != nil {
+            self.state = .dashboard
+        } else {
+            startAuth()
+        }
     }
     
     private func setupLogoutListener() {
@@ -62,11 +77,18 @@ public final class AppCoordinator: ObservableObject, Coordinator {
     }
     
     public func startAuth() {
+        let useCase = container.resolve(AuthUseCase.self)!
+        let coordinator = OrganizationAuthCoordinator(useCase: useCase)
+        self.authCoordinator = coordinator
         self.state = .auth
     }
     
     public func startTeamCourses(teamId: String, organizationId: String) {
         let coordinator = TeamCoursesCoordinator(teamId: teamId, organizationId: organizationId)
+        coordinator.onFinish = { [weak self] in
+            self?.state = .dashboard
+            self?.teamCoursesCoordinator = nil
+        }
         addChild(coordinator)
         self.teamCoursesCoordinator = coordinator
         self.state = .teamCourses

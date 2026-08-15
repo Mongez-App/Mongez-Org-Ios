@@ -7,7 +7,7 @@
 
 import Foundation
 public struct GetTeamCoursesResponseDTO: Decodable {
-    public let teamId: String
-    public let courses: [TeamCourseDTO]
-    public let total: Int
+    public let teamId: String?
+    public let courses: [TeamCourseDTO]?
+    public let total: Int?
 }

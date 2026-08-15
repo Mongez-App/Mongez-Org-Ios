@@ -9,17 +9,14 @@ import Foundation
 
 public enum AppTab: Int, CaseIterable {
     case dashboard
-    case courses
-    case roadmap
+    case teams
     case profile
     
     public var iconName: String {
         switch self {
         case .dashboard:
             return "home"
-        case .courses:
-            return "courses"
-        case .roadmap:
+        case .teams:
             return "roadmap"
         case .profile:
             return "profile"

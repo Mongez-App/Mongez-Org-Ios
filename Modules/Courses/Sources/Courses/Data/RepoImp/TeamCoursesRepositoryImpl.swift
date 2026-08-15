@@ -14,7 +14,7 @@ public class TeamCoursesRepositoryImpl: TeamCoursesRepository {
     public func getTeamCourses(teamId: String, organizationId: String) async throws -> [TeamCourse] {
         let endpoint = TeamCoursesEndPoint.getCourses(teamId: teamId, organizationId: organizationId)
         let response = try await NetworkManger.shared.request(endpoint: endpoint, responseType: GetTeamCoursesResponseDTO.self)
-        return response.courses.map { $0.toDomain() }
+        return response.courses?.map { $0.toDomain() } ?? []
     }
     
     public func createTeamCourse(teamId: String, organizationId: String, name: String, startDate: String, endDate: String, thumbnailUrl: String, materialIds: [String]) async throws -> String {

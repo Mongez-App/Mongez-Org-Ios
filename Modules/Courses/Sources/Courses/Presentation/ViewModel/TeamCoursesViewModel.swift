@@ -39,6 +39,7 @@ public class TeamCoursesViewModel: ObservableObject {
             self.courses = try await getCoursesUseCase.execute(teamId: teamId, organizationId: organizationId)
         } catch {
             self.errorMessage = error.localizedDescription
+            print("Fetch Courses Error: \(error)")
         }
         self.isLoading = false
     }
