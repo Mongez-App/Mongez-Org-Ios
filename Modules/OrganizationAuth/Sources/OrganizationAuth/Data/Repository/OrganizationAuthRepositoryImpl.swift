@@ -8,14 +8,14 @@ public final class OrganizationAuthRepositoryImpl: OrganizationAuthRepository {
         self.networkService = networkService
     }
 
-    public func login(idToken: String, name: String) async throws -> AuthResponse {
-        let response = try await networkService.login(idToken: idToken, name: name)
+    public func login(idToken: String, request: LoginRequest) async throws -> AuthResponse {
+        let response = try await networkService.login(idToken: idToken, request: request)
         persistSession(response: response)
         return response
     }
 
-    public func register(idToken: String, name: String) async throws -> AuthResponse {
-        let response = try await networkService.register(idToken: idToken, name: name)
+    public func register(idToken: String, request: RegisterRequest) async throws -> AuthResponse {
+        let response = try await networkService.register(idToken: idToken, request: request)
         persistSession(response: response)
         return response
     }

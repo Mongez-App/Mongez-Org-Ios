@@ -1,8 +1,8 @@
 import Foundation
 
 public protocol OrganizationAuthRepository {
-    func login(idToken: String, name: String) async throws -> AuthResponse
-    func register(idToken: String, name: String) async throws -> AuthResponse
+    func login(idToken: String, request: LoginRequest) async throws -> AuthResponse
+    func register(idToken: String, request: RegisterRequest) async throws -> AuthResponse
 }
 
 public enum AuthError: Error, LocalizedError {

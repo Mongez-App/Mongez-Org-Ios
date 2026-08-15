@@ -21,11 +21,11 @@ public final class AuthUseCaseImpl: AuthUseCase {
         do {
             let user = try await Auth.auth().signIn(withEmail: request.email, password: request.password).user
             let idToken = try await user.getIDToken()
-            return try await repository.login(idToken: idToken, name: user.displayName ?? "")
+            return try await repository.login(idToken: idToken, request: request)
         } catch let error as NSError
-            where AuthErrorCode(rawValue: error.code) == .wrongPassword
-                || AuthErrorCode(rawValue: error.code) == .userNotFound
-                || AuthErrorCode(rawValue: error.code) == .invalidEmail {
+            where AuthErrorCode.Code(rawValue: error.code) == .wrongPassword
+                || AuthErrorCode.Code(rawValue: error.code) == .userNotFound
+                || AuthErrorCode.Code(rawValue: error.code) == .invalidEmail {
             throw AuthError.invalidCredentials
         } catch {
             throw AuthError.networkError(error.localizedDescription)
@@ -47,10 +47,10 @@ public final class AuthUseCaseImpl: AuthUseCase {
             try await changeRequest.commitChanges()
 
             let idToken = try await user.getIDToken()
-            return try await repository.register(idToken: idToken, name: request.organizationName)
+            return try await repository.register(idToken: idToken, request: request)
         } catch let error as NSError
-            where AuthErrorCode(rawValue: error.code) == .emailAlreadyInUse
-                || AuthErrorCode(rawValue: error.code) == .invalidEmail {
+            where AuthErrorCode.Code(rawValue: error.code) == .emailAlreadyInUse
+                || AuthErrorCode.Code(rawValue: error.code) == .invalidEmail {
             throw AuthError.networkError("An account with this email already exists.")
         } catch {
             throw AuthError.networkError(error.localizedDescription)

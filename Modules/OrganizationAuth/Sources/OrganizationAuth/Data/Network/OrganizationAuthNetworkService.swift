@@ -1,8 +1,8 @@
 import Foundation
 
 public protocol OrganizationAuthNetworkService {
-    func login(idToken: String, name: String) async throws -> AuthResponse
-    func register(idToken: String, name: String) async throws -> AuthResponse
+    func login(idToken: String, request: LoginRequest) async throws -> AuthResponse
+    func register(idToken: String, request: RegisterRequest) async throws -> AuthResponse
 }
 
 public final class OrganizationAuthNetworkServiceImpl: OrganizationAuthNetworkService {
@@ -21,20 +21,20 @@ public final class OrganizationAuthNetworkServiceImpl: OrganizationAuthNetworkSe
         self.decoder = JSONDecoder()
     }
 
-    public func login(idToken: String, name: String) async throws -> AuthResponse {
+    public func login(idToken: String, request: LoginRequest) async throws -> AuthResponse {
         try await performPost(
             path: "/organization/auth/login",
             idToken: idToken,
-            body: OrganizationAuthBody(name: name),
+            body: request,
             expectedStatusCodes: 200...299
         )
     }
 
-    public func register(idToken: String, name: String) async throws -> AuthResponse {
+    public func register(idToken: String, request: RegisterRequest) async throws -> AuthResponse {
         try await performPost(
             path: "/organization/auth/register",
             idToken: idToken,
-            body: OrganizationAuthBody(name: name),
+            body: request,
             expectedStatusCodes: 200...299
         )
     }
