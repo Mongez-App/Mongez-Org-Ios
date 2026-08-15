@@ -7,7 +7,7 @@
 
 import SwiftUI
 import OrganizationAuth
-import FirebaseCore // 1. Add this import
+import FirebaseCore
 
 @main
 struct MongezOrgApp: App {
@@ -16,18 +16,21 @@ struct MongezOrgApp: App {
     private let coordinator: OrganizationAuthCoordinator
     
     init() {
-        FirebaseApp.configure() // 2. Add this initialization line
+        FirebaseApp.configure()
         
         let networkService = OrganizationAuthNetworkServiceImpl()
         let repository = OrganizationAuthRepositoryImpl(networkService: networkService)
-        let useCase = OrganizationAuthUseCaseImpl(repository: repository)
+        let useCase = AuthUseCaseImpl(repository: repository)
         self.coordinator = OrganizationAuthCoordinator(useCase: useCase)
     }
 
     var body: some Scene {
         WindowGroup {
-            OrganizationAuthCoordinatorView(coordinator: coordinator)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            OrganizationAuthCoordinatorView(
+                coordinator: coordinator,
+                dashboardContent: { AnyView(ContentView()) }
+            )
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

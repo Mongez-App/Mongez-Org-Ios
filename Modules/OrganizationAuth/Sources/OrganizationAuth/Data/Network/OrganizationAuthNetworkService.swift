@@ -1,82 +1,100 @@
 import Foundation
-import FirebaseAuth
 
 public protocol OrganizationAuthNetworkService {
-    func login(token: String) async throws -> AuthResponse
-    func register(token: String, request: RegisterOrganizationRequest) async throws -> AuthResponse
+    func login(request: LoginRequest) async throws -> AuthResponse
+    func register(request: RegisterRequest) async throws -> AuthResponse
 }
 
-public class OrganizationAuthNetworkServiceImpl: OrganizationAuthNetworkService {
-    private let baseURL = "https://api-gateway-production-5110.up.railway.app/api/v1"
-    
-    public init() {}
-    
-    public func login(token: String) async throws -> AuthResponse {
-        guard let url = URL(string: "\(baseURL)/organization/auth/login") else {
-            throw AuthError.invalidData
+public final class OrganizationAuthNetworkServiceImpl: OrganizationAuthNetworkService {
+    private let baseURL: String
+    private let session: URLSession
+    private let encoder: JSONEncoder
+    private let decoder: JSONDecoder
+
+    public init(
+        baseURL: String = "https://api-gateway-production-5110.up.railway.app/api/v1",
+        session: URLSession = .shared
+    ) {
+        self.baseURL = baseURL
+        self.session = session
+        self.encoder = JSONEncoder()
+        self.decoder = JSONDecoder()
+    }
+
+    public func login(request: LoginRequest) async throws -> AuthResponse {
+        try await performPost(
+            path: "/organization/auth/login",
+            body: request,
+            expectedStatusCodes: 200...299
+        )
+    }
+
+    public func register(request: RegisterRequest) async throws -> AuthResponse {
+        try await performPost(
+            path: "/organization/auth/register",
+            body: request,
+            expectedStatusCodes: 200...299
+        )
+    }
+
+    private func performPost<T: Encodable>(
+        path: String,
+        body: T,
+        expectedStatusCodes: ClosedRange<Int>
+    ) async throws -> AuthResponse {
+        guard let url = URL(string: "\(baseURL)\(path)") else {
+            throw AuthError.networkError("Invalid endpoint URL.")
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw AuthError.networkError("Invalid response")
-        }
-        
-        if httpResponse.statusCode == 401 {
-            throw AuthError.networkError("Unauthorized token")
-        }
-        
-        guard (200...299).contains(httpResponse.statusCode) else {
-            throw AuthError.networkError("Server error: \(httpResponse.statusCode)")
-        }
-        
-        let decoder = JSONDecoder()
+        request.timeoutInterval = 30
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+
         do {
-            let authResponse = try decoder.decode(AuthResponse.self, from: data)
-            return authResponse
+            request.httpBody = try encoder.encode(body)
         } catch {
             throw AuthError.invalidData
+        }
+
+        let data: Data
+        let response: URLResponse
+        do {
+            (data, response) = try await session.data(for: request)
+        } catch {
+            throw AuthError.networkError(error.localizedDescription)
+        }
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw AuthError.networkError("Invalid server response.")
+        }
+
+        guard expectedStatusCodes.contains(httpResponse.statusCode) else {
+            throw buildError(statusCode: httpResponse.statusCode, data: data)
+        }
+
+        do {
+            return try decoder.decode(AuthResponse.self, from: data)
+        } catch {
+            throw AuthError.decodingError(error.localizedDescription)
         }
     }
-    
-    public func register(token: String, request: RegisterOrganizationRequest) async throws -> AuthResponse {
-        guard let url = URL(string: "\(baseURL)/organization/auth/register") else {
-            throw AuthError.invalidData
+
+    private struct ServerErrorBody: Decodable {
+        let message: String?
+        let error: String?
+
+        var resolved: String {
+            message ?? error ?? "Something went wrong. Please try again."
         }
-        
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "POST"
-        urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let encoder = JSONEncoder()
-        urlRequest.httpBody = try? encoder.encode(request)
-        
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw AuthError.networkError("Invalid response")
+    }
+
+    private func buildError(statusCode: Int, data: Data) -> AuthError {
+        if let body = try? decoder.decode(ServerErrorBody.self, from: data) {
+            return AuthError.networkError(body.resolved)
         }
-        
-        if httpResponse.statusCode == 401 {
-            throw AuthError.networkError("Unauthorized token")
-        }
-        
-        guard (200...299).contains(httpResponse.statusCode) else {
-            throw AuthError.networkError("Server error: \(httpResponse.statusCode)")
-        }
-        
-        let decoder = JSONDecoder()
-        do {
-            let authResponse = try decoder.decode(AuthResponse.self, from: data)
-            return authResponse
-        } catch {
-            throw AuthError.invalidData
-        }
+        let fallback = HTTPURLResponse.localizedString(forStatusCode: statusCode)
+        return AuthError.networkError("Request failed with status \(statusCode): \(fallback)")
     }
 }
