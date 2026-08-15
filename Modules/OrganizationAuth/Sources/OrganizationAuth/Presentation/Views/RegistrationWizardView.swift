@@ -31,7 +31,12 @@ public struct RegistrationWizardView: View {
                 UnderReviewView(
                     currentStep: viewModel.currentStep,
                     totalSteps: viewModel.totalSteps,
-                    onDoneTap: onRegistrationComplete
+                    onDoneTap: onRegistrationComplete,
+                    onApproved: {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            viewModel.currentStep = 5
+                        }
+                    }
                 )
             case 5:
                 VerifiedView(

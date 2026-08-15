@@ -19,16 +19,22 @@ public final class AuthUseCaseImpl: AuthUseCase {
         }
 
         do {
-            let user = try await Auth.auth().signIn(withEmail: request.email, password: request.password).user
+            let user = try await Auth.auth().signIn(
+                withEmail: request.email,
+                password: request.password
+            ).user
             let idToken = try await user.getIDToken()
             return try await repository.login(idToken: idToken, request: request)
-        } catch let error as NSError
-            where AuthErrorCode.Code(rawValue: error.code) == .wrongPassword
-                || AuthErrorCode.Code(rawValue: error.code) == .userNotFound
-                || AuthErrorCode.Code(rawValue: error.code) == .invalidEmail {
-            throw AuthError.invalidCredentials
-        } catch {
-            throw AuthError.networkError(error.localizedDescription)
+        } catch let error as NSError {
+            switch AuthErrorCode.Code(rawValue: error.code) {
+            case .wrongPassword,
+                 .userNotFound,
+                 .invalidEmail,
+                 .invalidCredential:
+                throw AuthError.invalidCredentials
+            default:
+                throw AuthError.networkError(error.localizedDescription)
+            }
         }
     }
 
@@ -40,7 +46,11 @@ public final class AuthUseCaseImpl: AuthUseCase {
         }
 
         do {
-            let user = try await Auth.auth().createUser(withEmail: request.email, password: request.password).user
+            let result = try await Auth.auth().createUser(
+                withEmail: request.email,
+                password: request.password
+            )
+            let user = result.user
 
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = request.organizationName
@@ -48,12 +58,26 @@ public final class AuthUseCaseImpl: AuthUseCase {
 
             let idToken = try await user.getIDToken()
             return try await repository.register(idToken: idToken, request: request)
+
         } catch let error as NSError
-            where AuthErrorCode.Code(rawValue: error.code) == .emailAlreadyInUse
-                || AuthErrorCode.Code(rawValue: error.code) == .invalidEmail {
-            throw AuthError.networkError("An account with this email already exists.")
-        } catch {
-            throw AuthError.networkError(error.localizedDescription)
+            where AuthErrorCode.Code(rawValue: error.code) == .emailAlreadyInUse {
+            do {
+                let user = try await Auth.auth().signIn(
+                    withEmail: request.email,
+                    password: request.password
+                ).user
+                let idToken = try await user.getIDToken()
+                return try await repository.register(idToken: idToken, request: request)
+            } catch {
+                throw AuthError.networkError("An account with this email already exists.")
+            }
+        } catch let error as NSError {
+            switch AuthErrorCode.Code(rawValue: error.code) {
+            case .invalidEmail:
+                throw AuthError.networkError("Invalid email address.")
+            default:
+                throw AuthError.networkError(error.localizedDescription)
+            }
         }
     }
 }
