@@ -5,6 +5,7 @@ import Common
 public struct ContactAndLocationView: View {
     @ObservedObject var viewModel: AuthViewModel
     @StateObject private var locationManager = LocationManager()
+    @State private var isShowingPicker = false
 
     public init(viewModel: AuthViewModel) {
         self.viewModel = viewModel
@@ -88,7 +89,7 @@ public struct ContactAndLocationView: View {
             locationManager.startUpdatingLocation()
         }
         .onReceive(locationManager.$userLocation) { location in
-            guard let location else { return }
+            guard let location, viewModel.selectedCoordinate == nil else { return }
 
             withAnimation(.easeInOut(duration: 0.3)) {
                 viewModel.mapRegion = MKCoordinateRegion(
@@ -103,6 +104,18 @@ public struct ContactAndLocationView: View {
                 viewModel.errorMessage = message
             }
         }
+        .fullScreenCover(isPresented: $isShowingPicker) {
+            LocationPickerView(
+                initialRegion: viewModel.mapRegion,
+                userLocation: locationManager.userLocation
+            ) { coordinate in
+                viewModel.selectedCoordinate = coordinate
+                viewModel.mapRegion = MKCoordinateRegion(
+                    center: coordinate,
+                    span: viewModel.mapRegion.span
+                )
+            }
+        }
     }
 
     private var locationMap: some View {
@@ -112,15 +125,51 @@ public struct ContactAndLocationView: View {
                 .foregroundColor(AppTheme.Colors.black100)
 
             ZStack {
-                Map(coordinateRegion: mapRegionBinding)
-                    .frame(height: 200)
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                if let coordinate = viewModel.selectedCoordinate {
+                    Map(
+                        coordinateRegion: mapRegionBinding,
+                        annotationItems: [MapLocation(coordinate: coordinate)]
+                    ) { location in
+                        MapMarker(coordinate: location.coordinate, tint: AppTheme.Colors.red100)
+                    }
+                } else {
+                    Map(coordinateRegion: mapRegionBinding)
 
-                Image(systemName: "mappin.circle.fill")
-                    .font(.system(size: 40))
-                    .foregroundColor(AppTheme.Colors.red100)
+                    Image(systemName: "mappin.circle.fill")
+                        .font(.system(size: 40))
+                        .foregroundColor(AppTheme.Colors.red100)
+                        .allowsHitTesting(false)
+                }
+            }
+            .frame(height: 200)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
+            .overlay(alignment: .bottom) {
+                HStack(spacing: AppTheme.Spacing.xxSmall) {
+                    Image(systemName: "arrow.up.left.and.arrow.down.right")
+                        .font(.system(size: 11, weight: .semibold))
+
+                    Text("Tap to open map")
+                        .font(AppTheme.textStyle(size: 12, weight: .semibold))
+                }
+                .foregroundColor(AppTheme.Colors.white100)
+                .padding(.horizontal, AppTheme.Spacing.xSmall)
+                .padding(.vertical, 6)
+                .background(
+                    Capsule().fill(AppTheme.Colors.black100.opacity(0.6))
+                )
+                .padding(.bottom, AppTheme.Spacing.xSmall)
+                .allowsHitTesting(false)
+            }
+            .contentShape(RoundedRectangle(cornerRadius: 15))
+            .onTapGesture {
+                isShowingPicker = true
             }
         }
+    }
+
+    private struct MapLocation: Identifiable {
+        let id = UUID()
+        let coordinate: CLLocationCoordinate2D
     }
 
     private var mapRegionBinding: Binding<MKCoordinateRegion> {

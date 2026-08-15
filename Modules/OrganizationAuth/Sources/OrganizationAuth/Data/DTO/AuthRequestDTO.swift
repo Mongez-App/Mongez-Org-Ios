@@ -55,3 +55,11 @@ public struct RegisterRequest: Codable, Equatable {
         self.documentURL = documentURL
     }
 }
+
+public struct OrganizationAuthBody: Codable, Equatable {
+    public let name: String
+
+    public init(name: String) {
+        self.name = name
+    }
+}

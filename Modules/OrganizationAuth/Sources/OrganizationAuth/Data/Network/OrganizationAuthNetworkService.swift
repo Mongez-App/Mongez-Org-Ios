@@ -1,8 +1,8 @@
 import Foundation
 
 public protocol OrganizationAuthNetworkService {
-    func login(request: LoginRequest) async throws -> AuthResponse
-    func register(request: RegisterRequest) async throws -> AuthResponse
+    func login(idToken: String, name: String) async throws -> AuthResponse
+    func register(idToken: String, name: String) async throws -> AuthResponse
 }
 
 public final class OrganizationAuthNetworkServiceImpl: OrganizationAuthNetworkService {
@@ -21,24 +21,27 @@ public final class OrganizationAuthNetworkServiceImpl: OrganizationAuthNetworkSe
         self.decoder = JSONDecoder()
     }
 
-    public func login(request: LoginRequest) async throws -> AuthResponse {
+    public func login(idToken: String, name: String) async throws -> AuthResponse {
         try await performPost(
             path: "/organization/auth/login",
-            body: request,
+            idToken: idToken,
+            body: OrganizationAuthBody(name: name),
             expectedStatusCodes: 200...299
         )
     }
 
-    public func register(request: RegisterRequest) async throws -> AuthResponse {
+    public func register(idToken: String, name: String) async throws -> AuthResponse {
         try await performPost(
             path: "/organization/auth/register",
-            body: request,
+            idToken: idToken,
+            body: OrganizationAuthBody(name: name),
             expectedStatusCodes: 200...299
         )
     }
 
     private func performPost<T: Encodable>(
         path: String,
+        idToken: String,
         body: T,
         expectedStatusCodes: ClosedRange<Int>
     ) async throws -> AuthResponse {
@@ -51,6 +54,7 @@ public final class OrganizationAuthNetworkServiceImpl: OrganizationAuthNetworkSe
         request.timeoutInterval = 30
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer \(idToken)", forHTTPHeaderField: "Authorization")
 
         do {
             request.httpBody = try encoder.encode(body)
