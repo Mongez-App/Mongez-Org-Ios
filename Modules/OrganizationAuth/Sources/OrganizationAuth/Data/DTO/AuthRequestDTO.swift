@@ -11,7 +11,7 @@ public struct LoginRequest: Codable, Equatable {
 }
 
 public struct RegisterRequest: Codable, Equatable {
-    public let organizationName: String
+    public let name: String          // ← كان organizationName
     public let email: String
     public let password: String
     public let industryField: String
@@ -40,7 +40,7 @@ public struct RegisterRequest: Codable, Equatable {
         registrationNumber: String = "",
         documentURL: String = ""
     ) {
-        self.organizationName = organizationName
+        self.name = organizationName   // ← map هنا
         self.email = email
         self.password = password
         self.industryField = industryField

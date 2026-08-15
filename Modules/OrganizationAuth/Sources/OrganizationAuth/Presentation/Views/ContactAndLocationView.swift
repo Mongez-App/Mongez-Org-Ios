@@ -99,11 +99,7 @@ public struct ContactAndLocationView: View {
                 viewModel.selectedCoordinate = location
             }
         }
-        .onReceive(locationManager.$errorMessage) { message in
-            if let message {
-                viewModel.errorMessage = message
-            }
-        }
+        .onReceive(locationManager.$errorMessage) { _ in }
         .fullScreenCover(isPresented: $isShowingPicker) {
             LocationPickerView(
                 initialRegion: viewModel.mapRegion,

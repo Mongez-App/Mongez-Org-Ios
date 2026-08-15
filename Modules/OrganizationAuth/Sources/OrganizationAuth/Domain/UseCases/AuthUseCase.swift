@@ -39,7 +39,7 @@ public final class AuthUseCaseImpl: AuthUseCase {
     }
 
     public func register(request: RegisterRequest) async throws -> AuthResponse {
-        guard !request.organizationName.isEmpty,
+        guard !request.name.isEmpty,
               !request.email.isEmpty,
               !request.password.isEmpty else {
             throw AuthError.invalidData
@@ -53,7 +53,7 @@ public final class AuthUseCaseImpl: AuthUseCase {
             let user = result.user
 
             let changeRequest = user.createProfileChangeRequest()
-            changeRequest.displayName = request.organizationName
+            changeRequest.displayName = request.name
             try await changeRequest.commitChanges()
 
             let idToken = try await user.getIDToken()

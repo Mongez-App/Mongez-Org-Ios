@@ -106,13 +106,13 @@ public final class AuthViewModel: ObservableObject {
             do {
                 let response = try await self.useCase.register(request: self.buildRegisterRequest())
                 self.authenticatedOrganization = response.organization
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    self.currentStep = 4
+                }
             } catch {
-                // Backend error — log but continue flow
-                print("[Registration] Backend error (continuing): \(error.localizedDescription)")
-            }
-
-            withAnimation(.easeInOut(duration: 0.3)) {
-                self.currentStep = 4
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    self.currentStep = 4
+                }
             }
             self.isLoading = false
         }
