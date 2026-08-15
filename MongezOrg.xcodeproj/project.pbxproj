@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31EF5F263030AAB60056D5AE /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 31EF5F253030AAB60056D5AE /* Common */; };
 		5A3868A1302FB585007289C0 /* MongezOrgApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868A0302FB585007289C0 /* MongezOrgApp.swift */; };
 		5A3868A3302FB585007289C0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868A2302FB585007289C0 /* ContentView.swift */; };
 		5A3868A5302FB587007289C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A3868A4302FB587007289C0 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31EF5F263030AAB60056D5AE /* Common in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +77,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31EF5F243030AAB60056D5AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5A386894302FB585007289C0 = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +91,7 @@
 				5A3868B5302FB587007289C0 /* MongezOrgTests */,
 				5A3868BF302FB587007289C0 /* MongezOrgUITests */,
 				5A38689E302FB585007289C0 /* Products */,
+				31EF5F243030AAB60056D5AE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,6 +159,9 @@
 			dependencies = (
 			);
 			name = MongezOrg;
+			packageProductDependencies = (
+				31EF5F253030AAB60056D5AE /* Common */,
+			);
 			productName = MongezOrg;
 			productReference = 5A38689D302FB585007289C0 /* MongezOrg.app */;
 			productType = "com.apple.product-type.application";
@@ -585,6 +598,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		31EF5F253030AAB60056D5AE /* Common */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Common;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		5A3868AB302FB587007289C0 /* MongezOrg.xcdatamodeld */ = {
