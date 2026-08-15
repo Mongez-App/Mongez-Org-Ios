@@ -15,7 +15,7 @@ public class OrganizationAuthRepositoryImpl: OrganizationAuthRepository {
         
         // Step 2: Get JWT Token
         let token = try await getCurrentUserToken()
-        
+        print("==================================\(token)")
         // Step 3: Backend API login
         let response = try await networkService.login(token: token)
         

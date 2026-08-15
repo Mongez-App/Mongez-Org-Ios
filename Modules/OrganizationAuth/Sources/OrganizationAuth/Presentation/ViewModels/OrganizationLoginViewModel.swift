@@ -5,6 +5,7 @@ import Combine
 public class OrganizationLoginViewModel: ObservableObject {
     @Published public var email = ""
     @Published public var password = ""
+    @Published public var isPasswordVisible = false
     @Published public var isLoading = false
     @Published public var errorMessage: String?
     @Published public var isAuthenticated = false

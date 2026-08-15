@@ -7,6 +7,7 @@
 
 import SwiftUI
 import OrganizationAuth
+import FirebaseCore // 1. Add this import
 
 @main
 struct MongezOrgApp: App {
@@ -15,6 +16,8 @@ struct MongezOrgApp: App {
     private let coordinator: OrganizationAuthCoordinator
     
     init() {
+        FirebaseApp.configure() // 2. Add this initialization line
+        
         let networkService = OrganizationAuthNetworkServiceImpl()
         let repository = OrganizationAuthRepositoryImpl(networkService: networkService)
         let useCase = OrganizationAuthUseCaseImpl(repository: repository)
