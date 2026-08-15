@@ -40,9 +40,7 @@ public struct CustomTextField: View {
 
             HStack(spacing: AppTheme.Spacing.xxSmall) {
                 if let icon {
-                    Image(systemName: icon)
-                        .font(.system(size: 16))
-                        .foregroundColor(AppTheme.Colors.gray300)
+                    fieldIcon(icon)
                 }
 
                 TextField(placeholder, text: $text)
@@ -59,6 +57,20 @@ public struct CustomTextField: View {
                 RoundedRectangle(cornerRadius: AppTheme.radius.small)
                     .stroke(AppTheme.Colors.gray200, lineWidth: 1)
             )
+        }
+    }
+
+    @ViewBuilder
+    private func fieldIcon(_ icon: String) -> some View {
+        if let uiImage = UIImage(named: icon, in: .module, compatibleWith: nil) {
+            Image(uiImage: uiImage)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 16, height: 16)
+        } else {
+            Image(systemName: icon)
+                .font(.system(size: 16))
+                .foregroundColor(AppTheme.Colors.gray300)
         }
     }
 }

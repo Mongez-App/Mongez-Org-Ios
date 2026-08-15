@@ -40,7 +40,7 @@ public struct LoginView: View {
                             title: "Email",
                             placeholder: "Enter your email",
                             text: $viewModel.email,
-                            icon: "envelope",
+                            icon: "email",
                             keyboardType: .emailAddress,
                             textContentType: .emailAddress,
                             autocapitalization: .never
@@ -51,7 +51,7 @@ public struct LoginView: View {
                             placeholder: "Enter your password",
                             text: $viewModel.password,
                             isVisible: $viewModel.isPasswordVisible,
-                            icon: "lock"
+                            icon: "password"
                         )
 
                         Button(action: onForgotPassword) {
@@ -92,7 +92,7 @@ public struct LoginView: View {
     }
 
     private var illustration: some View {
-        Image("login_illustration")
+        Image("login_illustration", bundle: .module)
             .resizable()
             .scaledToFit()
             .frame(maxWidth: .infinity)
@@ -158,16 +158,10 @@ public struct LoginView: View {
     }
 
     private var googleIcon: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 4)
-                .fill(AppTheme.Colors.white100)
-                .frame(width: 18, height: 18)
-                .shadow(color: AppTheme.Colors.black100.opacity(0.25), radius: 1, y: 1)
-
-            Text("G")
-                .font(.system(size: 13, weight: .bold))
-                .foregroundColor(AppTheme.Colors.blue100)
-        }
+        Image("google_logo", bundle: .module)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 18, height: 18)
     }
 
     private var footer: some View {

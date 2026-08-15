@@ -25,7 +25,7 @@ public struct VerifiedView: View {
             Spacer()
 
             VStack(spacing: AppTheme.Spacing.large) {
-                Image("verified_illustration")
+                Image("verified_illustration", bundle: .module)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 160, height: 160)

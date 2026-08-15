@@ -19,7 +19,8 @@ let package = Package(
             dependencies: [
                 .product(name: "Common", package: "Common"),
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
-            ]
+            ],
+            resources: [.process("Themes/Assets.xcassets")]
         ),
         .testTarget(
             name: "OrganizationAuthTests",

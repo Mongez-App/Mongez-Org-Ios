@@ -31,9 +31,16 @@ public struct SecureInputView: View {
 
             HStack(spacing: AppTheme.Spacing.xxSmall) {
                 if let icon {
-                    Image(systemName: icon)
-                        .font(.system(size: 16))
-                        .foregroundColor(AppTheme.Colors.gray300)
+                    if let uiImage = UIImage(named: icon, in: .module, compatibleWith: nil) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 16, height: 16)
+                    } else {
+                        Image(systemName: icon)
+                            .font(.system(size: 16))
+                            .foregroundColor(AppTheme.Colors.gray300)
+                    }
                 }
 
                 Group {
@@ -48,9 +55,10 @@ public struct SecureInputView: View {
                 Button {
                     isVisible.toggle()
                 } label: {
-                    Image(systemName: isVisible ? "eye.slash.fill" : "eye.fill")
-                        .font(.system(size: 16))
-                        .foregroundColor(AppTheme.Colors.gray300)
+                    Image(isVisible ? "eye_shown" : "eye_hidden", bundle: .module)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 18, height: 18)
                 }
             }
             .frame(maxWidth: .infinity)

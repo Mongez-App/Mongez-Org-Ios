@@ -23,7 +23,7 @@ public struct CreateAccountView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, AppTheme.Spacing.small)
 
-                    Image("signup_illustration")
+                    Image("signup_illustration", bundle: .module)
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: .infinity)
@@ -37,14 +37,14 @@ public struct CreateAccountView: View {
                         title: "Organization Name",
                         placeholder: "Enter organization name",
                         text: $viewModel.orgName,
-                        icon: "building.2"
+                        icon: "name"
                     )
 
                     CustomTextField(
                         title: "Email",
                         placeholder: "Enter your email",
                         text: $viewModel.email,
-                        icon: "envelope",
+                        icon: "email",
                         keyboardType: .emailAddress,
                         textContentType: .emailAddress,
                         autocapitalization: .never
@@ -55,7 +55,7 @@ public struct CreateAccountView: View {
                         placeholder: "Create a password",
                         text: $viewModel.password,
                         isVisible: $viewModel.isPasswordVisible,
-                        icon: "lock"
+                        icon: "password"
                     )
 
                     SecureInputView(
@@ -63,7 +63,7 @@ public struct CreateAccountView: View {
                         placeholder: "Confirm your password",
                         text: $viewModel.confirmPassword,
                         isVisible: $viewModel.isConfirmPasswordVisible,
-                        icon: "lock"
+                        icon: "password"
                     )
 
                     if let error = viewModel.errorMessage {
@@ -82,9 +82,10 @@ public struct CreateAccountView: View {
     private var topBar: some View {
         HStack {
             Button(action: onBack) {
-                Image(systemName: "chevron.left")
-                    .font(.system(size: 17, weight: .semibold))
-                    .foregroundColor(AppTheme.Colors.black100)
+                Image("back", bundle: .module)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
                     .frame(width: 40, height: 40)
                     .background(Circle().fill(AppTheme.Colors.gray100))
             }
