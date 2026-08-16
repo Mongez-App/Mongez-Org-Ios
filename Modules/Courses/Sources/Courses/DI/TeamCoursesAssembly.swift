@@ -35,5 +35,25 @@ public class TeamCoursesAssembly: DIAssembly {
                 createTeamCourseUseCase: resolver.resolve(CreateTeamCourseUseCase.self)!
             )
         }
+
+        container.register(EventsRepository.self) { _ in
+            EventsRepositoryImpl()
+        }
+
+        container.register(GetEventsUseCase.self) { resolver in
+            GetEventsUseCase(repository: resolver.resolve(EventsRepository.self)!)
+        }
+        container.register(CreateEventUseCase.self) { resolver in
+            CreateEventUseCase(repository: resolver.resolve(EventsRepository.self)!)
+        }
+
+        container.register(EventsViewModel.self) { (resolver, teamId: String, organizationId: String) in
+            EventsViewModel(
+                teamId: teamId,
+                organizationId: organizationId,
+                getEventsUseCase: resolver.resolve(GetEventsUseCase.self)!,
+                createEventUseCase: resolver.resolve(CreateEventUseCase.self)!
+            )
+        }
     }
 }

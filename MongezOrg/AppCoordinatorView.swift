@@ -61,8 +61,9 @@ public struct AppCoordinatorView: View {
                 }
             case .teamCourses:
                 if let teamCoursesCoordinator = coordinator.teamCoursesCoordinator,
-                   let viewModel = coordinator.container.resolve(TeamCoursesViewModel.self, arguments: teamCoursesCoordinator.teamId, teamCoursesCoordinator.organizationId) {
-                    TeamCoursesCoordinatorView(coordinator: teamCoursesCoordinator, viewModel: viewModel)
+                   let viewModel = coordinator.container.resolve(TeamCoursesViewModel.self, arguments: teamCoursesCoordinator.teamId, teamCoursesCoordinator.organizationId),
+                   let eventsViewModel = coordinator.container.resolve(EventsViewModel.self, arguments: teamCoursesCoordinator.teamId, teamCoursesCoordinator.organizationId) {
+                    TeamCoursesCoordinatorView(coordinator: teamCoursesCoordinator, viewModel: viewModel, eventsViewModel: eventsViewModel)
                 } else {
                     Text("Error Loading Team Courses")
                 }
