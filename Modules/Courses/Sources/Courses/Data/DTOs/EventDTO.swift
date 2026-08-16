@@ -9,10 +9,11 @@ import Foundation
 
 public struct EventDTO: Decodable {
     public let id: String
-    public let courseId: String
+    public let courseId: String?
     public let courseName: String?
     public let eventType: String
     public let eventDate: String
+    public let daysLeft: Int?
 
     func toDomain() -> TeamEvent? {
         guard let date = EventDTO.parseDate(eventDate) else { return nil }
@@ -21,7 +22,8 @@ public struct EventDTO: Decodable {
             courseId: courseId,
             courseName: courseName ?? "",
             eventType: EventType(rawValue: eventType) ?? .assignment,
-            eventDate: date
+            eventDate: date,
+            daysLeft: daysLeft
         )
     }
 
