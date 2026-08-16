@@ -8,11 +8,14 @@
 import Foundation
 import Swinject
 import Common
+import CourseDetails
 
 public class TeamCoursesAssembly: DIAssembly {
     public init() {}
     
     public func assemble(container: Container) {
+        TeamCourseDetailsAssembly().assemble(container: container)
+        
         container.register(TeamCoursesRepository.self) { _ in
             TeamCoursesRepositoryImpl()
         }
@@ -32,7 +35,9 @@ public class TeamCoursesAssembly: DIAssembly {
                 teamId: teamId,
                 organizationId: organizationId,
                 getCoursesUseCase: resolver.resolve(GetTeamCoursesUseCase.self)!,
-                createTeamCourseUseCase: resolver.resolve(CreateTeamCourseUseCase.self)!
+                createTeamCourseUseCase: resolver.resolve(CreateTeamCourseUseCase.self)!,
+                uploadTeamCourseMaterialUseCase: resolver.resolve(UploadTeamCourseMaterialUseCase.self)!,
+                cloudinaryService: resolver.resolve(CloudinaryServiceProtocol.self)!
             )
         }
     }

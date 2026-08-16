@@ -11,8 +11,10 @@ import SwiftUI
 
 public struct TeamCoursesEmptyStateView: View {
     let onAddCourse: () -> Void
+    let isSearching: Bool
     
-    public init(onAddCourse: @escaping () -> Void) {
+    public init(isSearching: Bool = false, onAddCourse: @escaping () -> Void) {
+        self.isSearching = isSearching
         self.onAddCourse = onAddCourse
     }
     
@@ -32,28 +34,30 @@ public struct TeamCoursesEmptyStateView: View {
                 )
             
             VStack(spacing: AppTheme.Spacing.xxSmall) {
-                Text("No Courses Yet")
+                Text(isSearching ? "No Results Found" : "No Courses Yet")
                     .font(AppTheme.textStyle(size: 20, weight: .bold))
                     .foregroundColor(AppTheme.Colors.black100)
                 
-                Text("You haven't added any courses yet for this\nteam")
+                Text(isSearching ? "We couldn't find any courses matching your search." : "You haven't added any courses yet for this\nteam")
                     .font(AppTheme.textStyle(size: 14))
                     .foregroundColor(AppTheme.Colors.gray300)
                     .multilineTextAlignment(.center)
             }
             
-            Button(action: onAddCourse) {
-                Text("Add Your First Course")
-                    .font(AppTheme.textStyle(size: 16, weight: .semibold))
-                    .foregroundColor(AppTheme.Colors.white100)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .background(
-                        RoundedRectangle(cornerRadius: AppTheme.radius.small)
-                            .fill(AppTheme.Colors.purple200)
-                    )
+            if !isSearching {
+                Button(action: onAddCourse) {
+                    Text("Add Your First Course")
+                        .font(AppTheme.textStyle(size: 16, weight: .semibold))
+                        .foregroundColor(AppTheme.Colors.white100)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(
+                            RoundedRectangle(cornerRadius: AppTheme.radius.small)
+                                .fill(AppTheme.Colors.purple200)
+                        )
+                }
+                .padding(.horizontal, AppTheme.Spacing.xLarge)
             }
-            .padding(.horizontal, AppTheme.Spacing.xLarge)
             
             Spacer()
         }

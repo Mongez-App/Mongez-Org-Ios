@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 import Common
+import CourseDetails
 
 public struct TeamCoursesCoordinatorView: View {
     @StateObject public var coordinator: TeamCoursesCoordinator
     @StateObject public var viewModel: TeamCoursesViewModel
-    
     public init(coordinator: TeamCoursesCoordinator, viewModel: TeamCoursesViewModel) {
         self._coordinator = StateObject(wrappedValue: coordinator)
         self._viewModel = StateObject(wrappedValue: viewModel)
@@ -23,8 +23,13 @@ public struct TeamCoursesCoordinatorView: View {
             TeamCoursesView(viewModel: viewModel, coordinator: coordinator)
                 .navigationDestination(for: TeamCoursesRoute.self) { route in
                     switch route {
-                    case .courseDetails(let courseId):
-                        Text("Course Details for \(courseId)") // Replace with CourseDetailsCoordinatorView later
+                    case .courseDetails(let courseId, let courseName):
+                        if let detailsViewModel = coordinator.container.resolve(TeamCourseDetailsViewModel.self, arguments: courseId, courseName, coordinator.organizationId) {
+                            let detailsCoordinator = TeamCourseDetailsCoordinator()
+                            TeamCourseDetailsCoordinatorView(coordinator: detailsCoordinator, viewModel: detailsViewModel)
+                        } else {
+                            Text("Error loading details")
+                        }
                     default:
                         EmptyView()
                     }

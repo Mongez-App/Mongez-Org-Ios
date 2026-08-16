@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 import Common
+import Swinject
 
 public class TeamCoursesCoordinator: Coordinator, ObservableObject {
     public var id = UUID()
@@ -19,12 +20,14 @@ public class TeamCoursesCoordinator: Coordinator, ObservableObject {
     public let teamId: String
     public let teamName: String
     public let organizationId: String
+    public let container: Container
     public var onFinish: (() -> Void)?
     
-    public init(teamId: String, organizationId: String, teamName: String) {
+    public init(teamId: String, organizationId: String, teamName: String, container: Container) {
         self.teamId = teamId
         self.teamName = teamName
         self.organizationId = organizationId
+        self.container = container
     }
     
     public func push(_ route: TeamCoursesRoute) {
