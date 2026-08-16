@@ -17,11 +17,13 @@ public class TeamCoursesCoordinator: Coordinator, ObservableObject {
     @Published public var sheetRoute: TeamCoursesRoute?
     
     public let teamId: String
+    public let teamName: String
     public let organizationId: String
     public var onFinish: (() -> Void)?
     
-    public init(teamId: String, organizationId: String) {
+    public init(teamId: String, organizationId: String, teamName: String) {
         self.teamId = teamId
+        self.teamName = teamName
         self.organizationId = organizationId
     }
     
