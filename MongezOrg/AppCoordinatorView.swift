@@ -2,8 +2,10 @@ import Foundation
 import SwiftUI
 import Courses
 import OrganizationAuth
+import Profile
 import Common
 import Teams
+import Dashboard
 
 public struct AppCoordinatorView: View {
     @StateObject public var coordinator: AppCoordinator
@@ -37,10 +39,7 @@ public struct AppCoordinatorView: View {
                 MainTabContainer(selectedTab: $coordinator.selectedTab) { tab in
                     switch tab {
                     case .dashboard:
-                        VStack {
-                            Text("Dashboard Placeholder")
-                                .font(.largeTitle)
-                        }
+                        DashboardView()
                     case .teams:
                         if let viewModel = coordinator.container.resolve(TeamsViewModel.self) {
                             TeamsView(viewModel: viewModel) { teamId, teamName in
@@ -54,16 +53,14 @@ public struct AppCoordinatorView: View {
                             Text("Error Loading Teams")
                         }
                     case .profile:
-                        VStack {
-                            Text("Profile Placeholder")
-                                .font(.largeTitle)
-                        }
+                        ProfileView()
                     }
                 }
             case .teamCourses:
                 if let teamCoursesCoordinator = coordinator.teamCoursesCoordinator,
-                   let viewModel = coordinator.container.resolve(TeamCoursesViewModel.self, arguments: teamCoursesCoordinator.teamId, teamCoursesCoordinator.organizationId) {
-                    TeamCoursesCoordinatorView(coordinator: teamCoursesCoordinator, viewModel: viewModel)
+                   let viewModel = coordinator.container.resolve(TeamCoursesViewModel.self, arguments: teamCoursesCoordinator.teamId, teamCoursesCoordinator.organizationId),
+                   let eventsViewModel = coordinator.container.resolve(EventsViewModel.self, arguments: teamCoursesCoordinator.teamId, teamCoursesCoordinator.organizationId) {
+                    TeamCoursesCoordinatorView(coordinator: teamCoursesCoordinator, viewModel: viewModel, eventsViewModel: eventsViewModel)
                 } else {
                     Text("Error Loading Team Courses")
                 }
