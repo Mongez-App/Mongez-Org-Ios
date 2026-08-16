@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09E85FCB3031CE5E000FB73A /* Teams in Frameworks */ = {isa = PBXBuildFile; productRef = 09E85FCA3031CE5E000FB73A /* Teams */; };
 		312193EF3030BF85009D9A6C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 312193EE3030BF85009D9A6C /* GoogleService-Info.plist */; };
 		316035A83030B74B008D6337 /* OrganizationAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 316035A73030B74B008D6337 /* OrganizationAuth */; };
 		31E978CC3030FA5E000101E4 /* Courses in Frameworks */ = {isa = PBXBuildFile; productRef = 31E978CB3030FA5E000101E4 /* Courses */; };
@@ -67,6 +68,7 @@
 				31E978CC3030FA5E000101E4 /* Courses in Frameworks */,
 				31EF5F263030AAB60056D5AE /* Common in Frameworks */,
 				316035A83030B74B008D6337 /* OrganizationAuth in Frameworks */,
+				09E85FCB3031CE5E000FB73A /* Teams in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +178,7 @@
 				31EF5F253030AAB60056D5AE /* Common */,
 				316035A73030B74B008D6337 /* OrganizationAuth */,
 				31E978CB3030FA5E000101E4 /* Courses */,
+				09E85FCA3031CE5E000FB73A /* Teams */,
 			);
 			productName = MongezOrg;
 			productReference = 5A38689D302FB585007289C0 /* MongezOrg.app */;
@@ -618,6 +621,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		09E85FCA3031CE5E000FB73A /* Teams */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Teams;
+		};
 		316035A73030B74B008D6337 /* OrganizationAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OrganizationAuth;
