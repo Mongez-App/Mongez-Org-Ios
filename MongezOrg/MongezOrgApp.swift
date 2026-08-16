@@ -8,18 +8,20 @@
 import SwiftUI
 import Courses
 import OrganizationAuth
+import Common
 import FirebaseCore
 
 @main
 struct MongezOrgApp: App {
     let persistenceController = PersistenceController.shared
     @StateObject var appCoordinator = AppCoordinator()
-    
+    @State private var showSplash = true
+
     private let authCoordinator: OrganizationAuthCoordinator
-    
+
     init() {
         FirebaseApp.configure()
-        
+
         let networkService = OrganizationAuthNetworkServiceImpl()
         let repository = OrganizationAuthRepositoryImpl(networkService: networkService)
         let useCase = AuthUseCaseImpl(repository: repository)
@@ -28,10 +30,20 @@ struct MongezOrgApp: App {
 
     var body: some Scene {
         WindowGroup {
-            OrganizationAuthCoordinatorView(
-                coordinator: authCoordinator,
-                dashboardContent: { AnyView(AppCoordinatorView(coordinator: appCoordinator)) }
-            )
+            Group {
+                if showSplash {
+                    SplashScreenView(
+                        logoImageName: "logo",
+                        sloganImageName: "slogan",
+                        onSplashFinished: { showSplash = false }
+                    )
+                } else {
+                    OrganizationAuthCoordinatorView(
+                        coordinator: authCoordinator,
+                        dashboardContent: { AnyView(AppCoordinatorView(coordinator: appCoordinator)) }
+                    )
+                }
+            }
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
