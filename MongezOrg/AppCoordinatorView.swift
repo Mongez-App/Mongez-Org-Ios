@@ -15,7 +15,7 @@ public struct AppCoordinatorView: View {
         Group {
             switch coordinator.state {
             case .splash:
-                Text("Loading...")
+                Color.clear
                     .onAppear {
                         coordinator.finishSplash()
                     }
