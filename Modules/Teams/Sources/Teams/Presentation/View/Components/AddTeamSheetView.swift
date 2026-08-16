@@ -42,7 +42,7 @@ public struct AddTeamSheetView: View {
                                         .clipShape(Circle())
                                 } else {
                                     Circle()
-                                        .strokeBorder(AppTheme.Colors.gray200, lineWidth: 1)
+                                        .strokeBorder(AppTheme.Colors.purple200.opacity(0.85), lineWidth: 1)
                                         .background(Circle().fill(AppTheme.Colors.changeOpacity(color: AppTheme.Colors.purple200, opacity: 0.05)))
                                         .frame(width: 80, height: 80)
                                         .overlay(

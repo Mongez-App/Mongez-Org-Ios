@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09358ABE3032387D00C96DA7 /* Cloudinary in Frameworks */ = {isa = PBXBuildFile; productRef = 09358ABD3032387D00C96DA7 /* Cloudinary */; };
 		09E85FCB3031CE5E000FB73A /* Teams in Frameworks */ = {isa = PBXBuildFile; productRef = 09E85FCA3031CE5E000FB73A /* Teams */; };
 		312193EF3030BF85009D9A6C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 312193EE3030BF85009D9A6C /* GoogleService-Info.plist */; };
 		316035A83030B74B008D6337 /* OrganizationAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 316035A73030B74B008D6337 /* OrganizationAuth */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0927169F30323A7A007553A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		312193EE3030BF85009D9A6C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		31E978CD3030FADA000101E4 /* AppCoordinatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinatorView.swift; sourceTree = "<group>"; };
 		31E978CE3030FADA000101E4 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			files = (
 				31E978CC3030FA5E000101E4 /* Courses in Frameworks */,
 				31EF5F263030AAB60056D5AE /* Common in Frameworks */,
+				09358ABE3032387D00C96DA7 /* Cloudinary in Frameworks */,
 				316035A83030B74B008D6337 /* OrganizationAuth in Frameworks */,
 				09E85FCB3031CE5E000FB73A /* Teams in Frameworks */,
 			);
@@ -120,6 +123,7 @@
 		5A38689F302FB585007289C0 /* MongezOrg */ = {
 			isa = PBXGroup;
 			children = (
+				0927169F30323A7A007553A7 /* Info.plist */,
 				31E978CE3030FADA000101E4 /* AppCoordinator.swift */,
 				31E978CD3030FADA000101E4 /* AppCoordinatorView.swift */,
 				312193EE3030BF85009D9A6C /* GoogleService-Info.plist */,
@@ -179,6 +183,7 @@
 				316035A73030B74B008D6337 /* OrganizationAuth */,
 				31E978CB3030FA5E000101E4 /* Courses */,
 				09E85FCA3031CE5E000FB73A /* Teams */,
+				09358ABD3032387D00C96DA7 /* Cloudinary */,
 			);
 			productName = MongezOrg;
 			productReference = 5A38689D302FB585007289C0 /* MongezOrg.app */;
@@ -252,6 +257,9 @@
 				Base,
 			);
 			mainGroup = 5A386894302FB585007289C0;
+			packageReferences = (
+				09358ABC3032387D00C96DA7 /* XCRemoteSwiftPackageReference "cloudinary_ios" */,
+			);
 			productRefGroup = 5A38689E302FB585007289C0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -461,6 +469,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MongezOrg/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MongezOrg/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -489,6 +498,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MongezOrg/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MongezOrg/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -620,7 +630,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		09358ABC3032387D00C96DA7 /* XCRemoteSwiftPackageReference "cloudinary_ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cloudinary/cloudinary_ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		09358ABD3032387D00C96DA7 /* Cloudinary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 09358ABC3032387D00C96DA7 /* XCRemoteSwiftPackageReference "cloudinary_ios" */;
+			productName = Cloudinary;
+		};
 		09E85FCA3031CE5E000FB73A /* Teams */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Teams;
