@@ -71,14 +71,20 @@ public struct TeamsView: View {
                 if viewModel.teams.isEmpty {
                     VStack {
                         Spacer()
-                        Image("teams", bundle: .main)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 150, height: 150)
-                            .background(
-                                Circle().fill(AppTheme.Colors.changeOpacity(color: AppTheme.Colors.purple200, opacity: 0.15))
-                            )
-                            .padding(.bottom, AppTheme.Spacing.medium)
+                        
+                        ZStack {
+                            Circle()
+                                .fill(AppTheme.Colors.purple200.opacity(0.25))
+                                .frame(width: 130, height: 130)
+                            
+                            Image("group")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 72, height: 72)
+                                .foregroundColor(AppTheme.Colors.purple200)
+                        }
+                        .padding(.bottom, AppTheme.Spacing.medium)
                         
                         Text("No Teams Yet")
                             .font(AppTheme.textStyle(size: 20, weight: .bold))

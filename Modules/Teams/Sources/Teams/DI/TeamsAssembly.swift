@@ -22,10 +22,15 @@ public class TeamsAssembly: DIAssembly {
             CreateTeamUseCase(repository: resolver.resolve(TeamsRepository.self)!)
         }
         
+        container.register(CloudinaryServiceProtocol.self) { _ in
+            CloudinaryService()
+        }
+        
         container.register(TeamsViewModel.self) { resolver in
             TeamsViewModel(
                 getTeamsUseCase: resolver.resolve(GetTeamsUseCase.self)!,
-                createTeamUseCase: resolver.resolve(CreateTeamUseCase.self)!
+                createTeamUseCase: resolver.resolve(CreateTeamUseCase.self)!,
+                cloudinaryService: resolver.resolve(CloudinaryServiceProtocol.self)!
             )
         }
     }
