@@ -291,6 +291,8 @@ public struct ContactAndLocationView: View {
     }
 }
 
-#Preview {
+struct ContactAndLocationView_Previews: PreviewProvider {
+    static var previews: some View {
     ContactAndLocationView(viewModel: AuthViewModel(useCase: AuthUseCaseImpl(repository: OrganizationAuthRepositoryImpl(networkService: OrganizationAuthNetworkServiceImpl()))))
+}
 }

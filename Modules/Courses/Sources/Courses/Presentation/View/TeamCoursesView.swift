@@ -90,7 +90,7 @@ public struct TeamCoursesView: View {
             case "Events":
                 EventsTabView()
             case "Members":
-                MembersTabView()
+                MembersTabView(viewModel: viewModel)
             default:
                 EmptyView()
             }

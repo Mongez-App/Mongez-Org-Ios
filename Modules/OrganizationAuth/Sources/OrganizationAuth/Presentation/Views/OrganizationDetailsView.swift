@@ -215,6 +215,8 @@ public struct OrganizationDetailsView: View {
     }
 }
 
-#Preview {
+struct OrganizationDetailsView_Previews: PreviewProvider {
+    static var previews: some View {
     OrganizationDetailsView(viewModel: AuthViewModel(useCase: AuthUseCaseImpl(repository: OrganizationAuthRepositoryImpl(networkService: OrganizationAuthNetworkServiceImpl()))))
+}
 }

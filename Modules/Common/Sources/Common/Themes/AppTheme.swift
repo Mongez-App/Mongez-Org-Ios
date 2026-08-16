@@ -62,6 +62,10 @@ public enum AppTheme{
         public static func changeOpacity (color : Color, opacity:Double)->Color{
             return color.opacity(opacity)
         }
+        
+        public static func from(hex: String) -> Color {
+            return Color(hex: hex)
+        }
     }
     
     public static func textStyle(size: CGFloat, weight: Font.Weight = .regular) -> Font{
@@ -87,8 +91,8 @@ public enum AppTheme{
 }
 
 
-extension Color {
-    init(hex: String) {
+public extension Color {
+    public init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
         Scanner(string: hex).scanHexInt64(&int)

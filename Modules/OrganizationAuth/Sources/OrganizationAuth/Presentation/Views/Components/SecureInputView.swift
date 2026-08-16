@@ -72,7 +72,9 @@ public struct SecureInputView: View {
     }
 }
 
-#Preview {
+struct SecureInputView_Previews: PreviewProvider {
+    static var previews: some View {
     SecureInputView(title: "Password", placeholder: "Enter your password", text: .constant(""), isVisible: .constant(false), icon: "lock")
         .padding()
+}
 }
