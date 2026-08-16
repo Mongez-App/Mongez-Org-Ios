@@ -68,7 +68,13 @@ public struct TeamsView: View {
                 .padding(.bottom, AppTheme.Spacing.large)
                 
                 // Content
-                if viewModel.teams.isEmpty {
+                if viewModel.isLoading {
+                    Spacer()
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: AppTheme.Colors.purple200))
+                        .scaleEffect(1.5)
+                    Spacer()
+                } else if viewModel.teams.isEmpty {
                     VStack {
                         Spacer()
                         

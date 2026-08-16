@@ -15,7 +15,7 @@ public struct TeamListResponse {
 public struct Team {
     let id: String
     let name: String
-    let photoUrl: String
+    let photoUrl: String?
     let progress: Int
     let events: [String]
 }
@@ -23,7 +23,7 @@ public struct Team {
 public struct NewTeam {
     let id: String
     let name: String
-    let photoUrl: String
+    let photoUrl: String?
     let ownerId: String
     let progress: Int
     let events: [String]

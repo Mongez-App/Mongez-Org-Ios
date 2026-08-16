@@ -37,7 +37,7 @@ public struct TeamListResponseDTO: Decodable {
 public struct TeamDTO: Decodable {
     let id: String
     let name: String
-    let photoUrl: String
+    let photoUrl: String?
     let progress: Int
     let events: [String]
     

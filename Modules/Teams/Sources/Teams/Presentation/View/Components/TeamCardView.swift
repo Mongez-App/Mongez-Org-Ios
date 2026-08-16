@@ -66,7 +66,7 @@ public struct TeamCardView: View {
         Button(action: onClick) {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.small) {
                 HStack(spacing: AppTheme.Spacing.small) {
-                    if let url = URL(string: team.photoUrl), !team.photoUrl.isEmpty {
+                    if let photoUrl = team.photoUrl, !photoUrl.isEmpty, let url = URL(string: photoUrl) {
                         AsyncImage(url: url) { phase in
                             switch phase {
                             case .empty:
