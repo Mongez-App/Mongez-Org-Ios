@@ -124,7 +124,8 @@ public struct LocationPickerView: View {
     }
 }
 
-#Preview {
+struct LocationPickerView_Previews: PreviewProvider {
+    static var previews: some View {
     LocationPickerView(
         initialRegion: MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 30.0444, longitude: 31.2357),
@@ -132,4 +133,5 @@ public struct LocationPickerView: View {
         ),
         userLocation: nil
     ) { _ in }
+}
 }

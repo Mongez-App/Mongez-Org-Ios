@@ -59,6 +59,8 @@ public struct VerifiedView: View {
     }
 }
 
-#Preview {
+struct VerifiedView_Previews: PreviewProvider {
+    static var previews: some View {
     VerifiedView()
+}
 }
