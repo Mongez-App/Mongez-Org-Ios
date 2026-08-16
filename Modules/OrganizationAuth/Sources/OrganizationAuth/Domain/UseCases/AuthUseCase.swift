@@ -18,13 +18,13 @@ public final class AuthUseCaseImpl: AuthUseCase {
             throw AuthError.invalidData
         }
 
+        // Step 1: Firebase sign in
+        let user: FirebaseAuth.User
         do {
-            let user = try await Auth.auth().signIn(
+            user = try await Auth.auth().signIn(
                 withEmail: request.email,
                 password: request.password
             ).user
-            let idToken = try await user.getIDToken()
-            return try await repository.login(idToken: idToken, request: request)
         } catch let error as NSError {
             switch AuthErrorCode.Code(rawValue: error.code) {
             case .wrongPassword,
@@ -36,6 +36,23 @@ public final class AuthUseCaseImpl: AuthUseCase {
                 throw AuthError.networkError(error.localizedDescription)
             }
         }
+
+        // Step 2: Get token
+        let idToken = try await user.getIDTokenResult(forcingRefresh: true).token
+
+        // Step 3: Backend login — لو فشل نعمل register تلقائي
+        do {
+            let response = try await repository.login(idToken: idToken, request: request)
+            return response
+        } catch {
+            // Backend مش لاقيه — نعمله register بالبيانات الموجودة
+            let registerRequest = RegisterRequest(
+                organizationName: user.displayName ?? request.email,
+                email: request.email,
+                password: request.password
+            )
+            return try await repository.register(idToken: idToken, request: registerRequest)
+        }
     }
 
     public func register(request: RegisterRequest) async throws -> AuthResponse {
@@ -45,29 +62,23 @@ public final class AuthUseCaseImpl: AuthUseCase {
             throw AuthError.invalidData
         }
 
+        var user: FirebaseAuth.User
         do {
             let result = try await Auth.auth().createUser(
                 withEmail: request.email,
                 password: request.password
             )
-            let user = result.user
-
+            user = result.user
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = request.name
             try await changeRequest.commitChanges()
-
-            let idToken = try await user.getIDToken()
-            return try await repository.register(idToken: idToken, request: request)
-
         } catch let error as NSError
             where AuthErrorCode.Code(rawValue: error.code) == .emailAlreadyInUse {
             do {
-                let user = try await Auth.auth().signIn(
+                user = try await Auth.auth().signIn(
                     withEmail: request.email,
                     password: request.password
                 ).user
-                let idToken = try await user.getIDToken()
-                return try await repository.register(idToken: idToken, request: request)
             } catch {
                 throw AuthError.networkError("An account with this email already exists.")
             }
@@ -79,5 +90,7 @@ public final class AuthUseCaseImpl: AuthUseCase {
                 throw AuthError.networkError(error.localizedDescription)
             }
         }
+        let idToken = try await user.getIDTokenResult(forcingRefresh: true).token
+        return try await repository.register(idToken: idToken, request: request)
     }
 }
