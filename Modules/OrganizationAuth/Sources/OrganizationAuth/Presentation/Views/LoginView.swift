@@ -92,7 +92,7 @@ public struct LoginView: View {
     }
 
     private var illustration: some View {
-        Image("login_illustration", bundle: .module)
+        Image("Login-illustration", bundle: .module)
             .resizable()
             .scaledToFit()
             .frame(maxWidth: .infinity)
