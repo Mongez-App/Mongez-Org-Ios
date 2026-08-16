@@ -14,6 +14,7 @@
 		31E978CF3030FADA000101E4 /* AppCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E978CD3030FADA000101E4 /* AppCoordinatorView.swift */; };
 		31E978D03030FADA000101E4 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E978CE3030FADA000101E4 /* AppCoordinator.swift */; };
 		31EF5F263030AAB60056D5AE /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 31EF5F253030AAB60056D5AE /* Common */; };
+		124DABCAA16A6A6D22A0528B /* Dashboard in Frameworks */ = {isa = PBXBuildFile; productRef = 2B2EF11682BDB55FB2AB9419 /* Dashboard */; };
 		5A3868A1302FB585007289C0 /* MongezOrgApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868A0302FB585007289C0 /* MongezOrgApp.swift */; };
 		5A3868A3302FB585007289C0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868A2302FB585007289C0 /* ContentView.swift */; };
 		5A3868A5302FB587007289C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A3868A4302FB587007289C0 /* Assets.xcassets */; };
@@ -69,6 +70,7 @@
 				31EF5F263030AAB60056D5AE /* Common in Frameworks */,
 				316035A83030B74B008D6337 /* OrganizationAuth in Frameworks */,
 				09E85FCB3031CE5E000FB73A /* Teams in Frameworks */,
+				124DABCAA16A6A6D22A0528B /* Dashboard in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +181,7 @@
 				316035A73030B74B008D6337 /* OrganizationAuth */,
 				31E978CB3030FA5E000101E4 /* Courses */,
 				09E85FCA3031CE5E000FB73A /* Teams */,
+				2B2EF11682BDB55FB2AB9419 /* Dashboard */,
 			);
 			productName = MongezOrg;
 			productReference = 5A38689D302FB585007289C0 /* MongezOrg.app */;
@@ -636,6 +639,10 @@
 		31EF5F253030AAB60056D5AE /* Common */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Common;
+		};
+		2B2EF11682BDB55FB2AB9419 /* Dashboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Dashboard;
 		};
 /* End XCSwiftPackageProductDependency section */
 

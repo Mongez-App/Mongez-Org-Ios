@@ -4,6 +4,7 @@ import Courses
 import OrganizationAuth
 import Common
 import Teams
+import Dashboard
 
 public struct AppCoordinatorView: View {
     @StateObject public var coordinator: AppCoordinator
@@ -37,10 +38,7 @@ public struct AppCoordinatorView: View {
                 MainTabContainer(selectedTab: $coordinator.selectedTab) { tab in
                     switch tab {
                     case .dashboard:
-                        VStack {
-                            Text("Dashboard Placeholder")
-                                .font(.largeTitle)
-                        }
+                        DashboardView()
                     case .teams:
                         if let viewModel = coordinator.container.resolve(TeamsViewModel.self) {
                             TeamsView(viewModel: viewModel) { teamId, teamName in
