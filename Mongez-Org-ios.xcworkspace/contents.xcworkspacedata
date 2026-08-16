@@ -14,6 +14,9 @@
       location = "group:Modules/Courses">
    </FileRef>
    <FileRef
+      location = "group:Modules/Dashboard">
+   </FileRef>
+   <FileRef
       location = "container:MongezOrg.xcodeproj">
    </FileRef>
 </Workspace>
