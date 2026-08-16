@@ -23,7 +23,7 @@ public struct CreateAccountView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, AppTheme.Spacing.small)
 
-                    Image("signup_illustration", bundle: .module)
+                    Image("Sign up-illustration", bundle: .module)
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: .infinity)
