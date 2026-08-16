@@ -8,12 +8,27 @@
 import Foundation
 import SwiftUI
 
+public enum AppearanceMode: String, CaseIterable, Identifiable {
+    case system = "System"
+    case light = "Light"
+    case dark = "Dark"
+
+    public var id: String { rawValue }
+}
+
+public enum AppLanguage: String, CaseIterable, Identifiable {
+    case english = "EN"
+    case arabic = "AR"
+
+    public var id: String { rawValue }
+}
+
 @MainActor
 public class ProfileViewModel: ObservableObject {
     @Published public var organizationName: String = "Organization Name"
     @Published public var organizationEmail: String = "myorganization@gmail.com"
-    @Published public var isDarkModeEnabled: Bool = false
-    @Published public var language: String = "EN"
+    @Published public var appearanceMode: AppearanceMode = .system
+    @Published public var language: AppLanguage = .english
     @Published public var showLogoutConfirmation: Bool = false
 
     public init() {}

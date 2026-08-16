@@ -45,29 +45,26 @@ public struct ProfileView: View {
                 .padding(.bottom, AppTheme.Spacing.xLarge)
 
                 VStack(spacing: 0) {
-                    settingsRow(icon: "moon.stars.fill", iconColor: AppTheme.Colors.purple200, title: "Dark Mode") {
-                        Toggle("", isOn: $viewModel.isDarkModeEnabled)
-                            .labelsHidden()
-                            .tint(AppTheme.Colors.purple200)
+                    settingsRow(icon: "moon.stars.fill", iconColor: AppTheme.Colors.purple200, title: "Preferences") {
+                        Menu {
+                            ForEach(AppearanceMode.allCases) { mode in
+                                Button(mode.rawValue) { viewModel.appearanceMode = mode }
+                            }
+                        } label: {
+                            dropdownPill(text: viewModel.appearanceMode.rawValue)
+                        }
                     }
 
                     divider
 
                     settingsRow(icon: "globe", iconColor: AppTheme.Colors.purple200, title: "Language") {
-                        HStack(spacing: 4) {
-                            Text(viewModel.language)
-                                .font(AppTheme.textStyle(size: 13, weight: .semibold))
-                                .foregroundColor(AppTheme.Colors.black100)
-                            Image(systemName: "chevron.down")
-                                .font(.system(size: 10, weight: .semibold))
-                                .foregroundColor(AppTheme.Colors.gray300)
+                        Menu {
+                            ForEach(AppLanguage.allCases) { lang in
+                                Button(lang.rawValue) { viewModel.language = lang }
+                            }
+                        } label: {
+                            dropdownPill(text: viewModel.language.rawValue)
                         }
-                        .padding(.horizontal, AppTheme.Spacing.xSmall)
-                        .padding(.vertical, AppTheme.Spacing.xxxSmall)
-                        .background(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(AppTheme.Colors.gray200, lineWidth: 1)
-                        )
                     }
 
                     divider
@@ -113,6 +110,23 @@ public struct ProfileView: View {
         Rectangle()
             .fill(AppTheme.Colors.gray200)
             .frame(height: 1)
+    }
+
+    private func dropdownPill(text: String) -> some View {
+        HStack(spacing: 4) {
+            Text(text)
+                .font(AppTheme.textStyle(size: 13, weight: .semibold))
+                .foregroundColor(AppTheme.Colors.black100)
+            Image(systemName: "chevron.down")
+                .font(.system(size: 10, weight: .semibold))
+                .foregroundColor(AppTheme.Colors.gray300)
+        }
+        .padding(.horizontal, AppTheme.Spacing.xSmall)
+        .padding(.vertical, AppTheme.Spacing.xxxSmall)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(AppTheme.Colors.gray200, lineWidth: 1)
+        )
     }
 
     @ViewBuilder
