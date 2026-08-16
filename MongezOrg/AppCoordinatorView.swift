@@ -43,8 +43,12 @@ public struct AppCoordinatorView: View {
                         }
                     case .teams:
                         if let viewModel = coordinator.container.resolve(TeamsViewModel.self) {
-                            TeamsView(viewModel: viewModel) { teamId in
-                                coordinator.startTeamCourses(teamId: teamId, organizationId: "org22")
+                            TeamsView(viewModel: viewModel) { teamId, teamName in
+                                coordinator.startTeamCourses(
+                                    teamId: teamId,
+                                    teamName: teamName,
+                                    organizationId: UserDefaults.standard.string(forKey: "current_user_id") ?? ""
+                                )
                             }
                         } else {
                             Text("Error Loading Teams")

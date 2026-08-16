@@ -85,8 +85,8 @@ public final class AppCoordinator: ObservableObject, Coordinator {
         self.state = .auth
     }
     
-    public func startTeamCourses(teamId: String, organizationId: String) {
-        let coordinator = TeamCoursesCoordinator(teamId: teamId, organizationId: organizationId)
+    public func startTeamCourses(teamId: String, teamName: String, organizationId: String) {
+        let coordinator = TeamCoursesCoordinator(teamId: teamId, organizationId: organizationId, teamName: teamName)
         coordinator.onFinish = { [weak self] in
             self?.state = .dashboard
             self?.teamCoursesCoordinator = nil

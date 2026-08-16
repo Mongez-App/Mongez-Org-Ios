@@ -30,7 +30,7 @@ public struct TeamCoursesView: View {
                         .foregroundColor(AppTheme.Colors.purple200)
                 }
                 
-                Text("Mobile Native")
+                Text(coordinator.teamName)
                     .font(AppTheme.textStyle(size: 28, weight: .bold))
                     .foregroundColor(AppTheme.Colors.black100)
                 

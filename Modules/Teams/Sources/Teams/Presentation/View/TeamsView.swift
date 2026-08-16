@@ -8,9 +8,9 @@ public struct TeamsView: View {
     @State private var showSuccessAlert = false
     
     // Pass a closure for navigation when a team is clicked
-    var onTeamTap: (String) -> Void
-    
-    public init(viewModel: TeamsViewModel, onTeamTap: @escaping (String) -> Void) {
+    var onTeamTap: (String, String) -> Void
+
+    public init(viewModel: TeamsViewModel, onTeamTap: @escaping (String, String) -> Void) {
         self._viewModel = StateObject(wrappedValue: viewModel)
         self.onTeamTap = onTeamTap
     }
@@ -108,7 +108,7 @@ public struct TeamsView: View {
                         LazyVStack(spacing: AppTheme.Spacing.large) {
                             ForEach(filteredTeams, id: \.id) { team in
                                 TeamCardView(team: team) {
-                                    onTeamTap(team.id)
+                                    onTeamTap(team.id, team.name)
                                 }
                             }
                         }
