@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import Courses
 import OrganizationAuth
+import Profile
 import Common
 import Teams
 import Dashboard
@@ -52,10 +53,7 @@ public struct AppCoordinatorView: View {
                             Text("Error Loading Teams")
                         }
                     case .profile:
-                        VStack {
-                            Text("Profile Placeholder")
-                                .font(.largeTitle)
-                        }
+                        ProfileView()
                     }
                 }
             case .teamCourses:
