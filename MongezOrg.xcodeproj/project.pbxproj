@@ -22,6 +22,7 @@
 		5A3868B7302FB587007289C0 /* MongezOrgTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868B6302FB587007289C0 /* MongezOrgTests.swift */; };
 		5A3868C1302FB587007289C0 /* MongezOrgUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868C0302FB587007289C0 /* MongezOrgUITests.swift */; };
 		5A3868C3302FB587007289C0 /* MongezOrgUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3868C2302FB587007289C0 /* MongezOrgUITestsLaunchTests.swift */; };
+		F68D9800CF91E5069A509DB1 /* Profile in Frameworks */ = {isa = PBXBuildFile; productRef = F0A82005C851A6C821543737 /* Profile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 				31E978CC3030FA5E000101E4 /* Courses in Frameworks */,
 				31EF5F263030AAB60056D5AE /* Common in Frameworks */,
 				316035A83030B74B008D6337 /* OrganizationAuth in Frameworks */,
+				F68D9800CF91E5069A509DB1 /* Profile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +178,7 @@
 				31EF5F253030AAB60056D5AE /* Common */,
 				316035A73030B74B008D6337 /* OrganizationAuth */,
 				31E978CB3030FA5E000101E4 /* Courses */,
+				F0A82005C851A6C821543737 /* Profile */,
 			);
 			productName = MongezOrg;
 			productReference = 5A38689D302FB585007289C0 /* MongezOrg.app */;
@@ -629,6 +632,10 @@
 		31EF5F253030AAB60056D5AE /* Common */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Common;
+		};
+		F0A82005C851A6C821543737 /* Profile */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Profile;
 		};
 /* End XCSwiftPackageProductDependency section */
 

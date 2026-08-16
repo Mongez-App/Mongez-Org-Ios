@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import Courses
 import OrganizationAuth
+import Profile
 import Common
 
 public struct AppCoordinatorView: View {
@@ -53,10 +54,7 @@ public struct AppCoordinatorView: View {
                             .cornerRadius(8)
                         }
                     case .profile:
-                        VStack {
-                            Text("Profile Placeholder")
-                                .font(.largeTitle)
-                        }
+                        ProfileView()
                     }
                 }
             case .teamCourses:
