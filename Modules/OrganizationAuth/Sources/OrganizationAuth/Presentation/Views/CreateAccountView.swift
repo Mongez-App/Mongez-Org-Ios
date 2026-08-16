@@ -129,6 +129,8 @@ public struct CreateAccountView: View {
     }
 }
 
-#Preview {
+struct CreateAccountView_Previews: PreviewProvider {
+    static var previews: some View {
     CreateAccountView(viewModel: AuthViewModel(useCase: AuthUseCaseImpl(repository: OrganizationAuthRepositoryImpl(networkService: OrganizationAuthNetworkServiceImpl()))))
+}
 }

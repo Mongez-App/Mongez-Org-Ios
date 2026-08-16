@@ -30,4 +30,29 @@ public class TeamCoursesRepositoryImpl: TeamCoursesRepository {
         let response = try await NetworkManger.shared.request(endpoint: endpoint, responseType: UploadTeamCourseMaterialResponseDTO.self)
         return response.fileUrl
     }
+    
+    public func getTeamMembers(teamId: String) async throws -> (pending: [TeamMember], active: [TeamMember]) {
+        let endpoint = TeamCoursesEndPoint.getMembers(teamId: teamId)
+        let response = try await NetworkManger.shared.request(endpoint: endpoint, responseType: GetTeamMembersResponseDTO.self)
+        
+        let pending = response.pendingMembers.map { $0.toDomain() }
+        let active = response.teamMembers.map { $0.toDomain() }
+        
+        return (pending: pending, active: active)
+    }
+    
+    public func acceptMember(memberId: String) async throws {
+        let requestDTO = MemberActionRequestDTO(memberId: memberId)
+        let endpoint = TeamCoursesEndPoint.acceptMember(request: requestDTO)
+        // Since we don't necessarily need the response data, we can just use requestRaw or map to a dummy response
+        // Using TeamMemberDTO as response since accept returns the updated member
+        _ = try await NetworkManger.shared.request(endpoint: endpoint, responseType: TeamMemberDTO.self)
+    }
+    
+    public func declineMember(memberId: String) async throws {
+        let requestDTO = MemberActionRequestDTO(memberId: memberId)
+        let endpoint = TeamCoursesEndPoint.declineMember(request: requestDTO)
+        // Using TeamMemberDTO as response since decline returns the updated member
+        _ = try await NetworkManger.shared.request(endpoint: endpoint, responseType: TeamMemberDTO.self)
+    }
 }
