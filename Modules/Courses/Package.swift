@@ -11,6 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Common"),
+        .package(path: "../CourseDetails"),
         .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0")
     ],
     targets: [
@@ -18,6 +19,7 @@ let package = Package(
             name: "Courses",
             dependencies: [
                 .product(name: "Common", package: "Common"),
+                .product(name: "CourseDetails", package: "CourseDetails"),
                 .product(name: "Swinject-Dynamic", package: "Swinject")
             ]),
         .testTarget(

@@ -23,6 +23,14 @@ public struct TeamCoursesView: View {
         self.coordinator = coordinator
     }
     
+    private var filteredCourses: [TeamCourse] {
+        if searchText.isEmpty {
+            return viewModel.courses
+        } else {
+            return viewModel.courses.filter { $0.title.lowercased().contains(searchText.lowercased()) }
+        }
+    }
+    
     public var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: AppTheme.Spacing.small) {
@@ -91,8 +99,12 @@ public struct TeamCoursesView: View {
             case "Courses":
                 CoursesTabView(
                     searchText: $searchText,
-                    courses: viewModel.courses,
-                    onAddCourse: { coordinator.presentSheet(.addCourse) }
+                    courses: filteredCourses,
+                    isLoading: viewModel.isLoading,
+                    onAddCourse: { coordinator.presentSheet(.addCourse) },
+                    onCourseTapped: { course in
+                        coordinator.push(.courseDetails(courseId: course.id, courseName: course.title))
+                    }
                 )
             case "Events":
                 EventsTabView(

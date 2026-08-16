@@ -16,12 +16,16 @@ import Common
 public struct CoursesTabView: View {
     @Binding var searchText: String
     let courses: [TeamCourse]
+    let isLoading: Bool
     let onAddCourse: () -> Void
+    let onCourseTapped: (TeamCourse) -> Void
     
-    public init(searchText: Binding<String>, courses: [TeamCourse], onAddCourse: @escaping () -> Void) {
+    public init(searchText: Binding<String>, courses: [TeamCourse], isLoading: Bool, onAddCourse: @escaping () -> Void, onCourseTapped: @escaping (TeamCourse) -> Void) {
         self._searchText = searchText
         self.courses = courses
+        self.isLoading = isLoading
         self.onAddCourse = onAddCourse
+        self.onCourseTapped = onCourseTapped
     }
     
     public var body: some View {
@@ -41,13 +45,27 @@ public struct CoursesTabView: View {
             )
             .padding(.horizontal, AppTheme.Spacing.medium)
             
-            if courses.isEmpty {
-                TeamCoursesEmptyStateView(onAddCourse: onAddCourse)
+            if isLoading {
+                Spacer()
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: AppTheme.Colors.purple200))
+                    .scaleEffect(1.5)
+                Spacer()
+            } else if courses.isEmpty {
+                TeamCoursesEmptyStateView(
+                    isSearching: !searchText.isEmpty,
+                    onAddCourse: onAddCourse
+                )
             } else {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: AppTheme.Spacing.large) {
                         ForEach(courses) { course in
-                            TeamCourseCardView(course: course)
+                            Button(action: {
+                                onCourseTapped(course)
+                            }) {
+                                TeamCourseCardView(course: course)
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                     .padding(.horizontal, AppTheme.Spacing.medium)

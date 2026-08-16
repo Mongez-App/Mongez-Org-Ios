@@ -8,7 +8,7 @@
 import Foundation
 
 public enum TeamCoursesRoute: Equatable, Hashable {
-    case courseDetails(courseId: String)
+    case courseDetails(courseId: String, courseName: String)
     case addCourse
     case addEvent
 }
@@ -16,7 +16,7 @@ public enum TeamCoursesRoute: Equatable, Hashable {
 extension TeamCoursesRoute: Identifiable {
     public var id: String {
         switch self {
-        case .courseDetails(let id): return "course_\(id)"
+        case .courseDetails(let id, _): return "course_\(id)"
         case .addCourse: return "addCourse"
         case .addEvent: return "addEvent"
         }

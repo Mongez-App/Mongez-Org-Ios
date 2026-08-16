@@ -196,11 +196,12 @@ public struct AddCourseSheetView: View {
                 Task {
                     let formatter = DateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd"
-                    
                     let success = await viewModel.createCourse(
                         name: courseName,
                         startDate: formatter.string(from: startDate),
-                        endDate: formatter.string(from: endDate)
+                        endDate: formatter.string(from: endDate),
+                        thumbnail: selectedImage,
+                        materialUrl: selectedFileURL
                     )
                     
                     if success {

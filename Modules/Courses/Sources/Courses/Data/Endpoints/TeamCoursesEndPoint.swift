@@ -79,13 +79,16 @@ public enum TeamCoursesEndPoint: EndPoint {
         }
     }
     
-    private func createMultipartBody(courseId: String, fileData: Data, fileName: String, mimeType: String, boundary: String) -> Data {
+    private func createMultipartBody(courseId: String?, fileData: Data, fileName: String, mimeType: String, boundary: String) -> Data {
         var body = Data()
         let lineBreak = "\r\n"
         
-        body.append("--\(boundary)\(lineBreak)".data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"courseId\"\(lineBreak)\(lineBreak)".data(using: .utf8)!)
-        body.append("\(courseId)\(lineBreak)".data(using: .utf8)!)
+        if let courseId = courseId {
+            body.append("--\(boundary)\(lineBreak)".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"courseId\"\(lineBreak)\(lineBreak)".data(using: .utf8)!)
+            body.append("\(courseId)\(lineBreak)".data(using: .utf8)!)
+        }
+        
         body.append("--\(boundary)\(lineBreak)".data(using: .utf8)!)
         body.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(fileName)\"\(lineBreak)".data(using: .utf8)!)
         body.append("Content-Type: \(mimeType)\(lineBreak)\(lineBreak)".data(using: .utf8)!)
