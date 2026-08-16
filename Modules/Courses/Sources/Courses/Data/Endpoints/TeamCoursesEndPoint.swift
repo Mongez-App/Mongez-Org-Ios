@@ -13,6 +13,11 @@ public enum TeamCoursesEndPoint: EndPoint {
     case createCourse(request: CreateTeamCourseRequestDTO, organizationId: String)
     case uploadMaterial(courseId: String, fileData: Data, fileName: String, mimeType: String, boundary: String)
     
+    // Members
+    case getMembers(teamId: String)
+    case acceptMember(request: MemberActionRequestDTO)
+    case declineMember(request: MemberActionRequestDTO)
+    
     public var baseURL: String {
         return "https://api-gateway-production-5110.up.railway.app/api/v1"
     }
@@ -22,13 +27,16 @@ public enum TeamCoursesEndPoint: EndPoint {
         case .getCourses(let teamId, _): return "/organization/getCourses?teamId=\(teamId)"
         case .createCourse: return "/organization/createCourse"
         case .uploadMaterial: return "/organization/uploadCourseMaterial"
+        case .getMembers(let teamId): return "/organization/getMembers?teamId=\(teamId)"
+        case .acceptMember: return "/organization/acceptMember"
+        case .declineMember: return "/organization/declineMember"
         }
     }
     
     public var method: HTTPMethod {
         switch self {
-        case .getCourses: return .get
-        case .createCourse, .uploadMaterial: return .post
+        case .getCourses, .getMembers: return .get
+        case .createCourse, .uploadMaterial, .acceptMember, .declineMember: return .post
         }
     }
     
@@ -51,15 +59,20 @@ public enum TeamCoursesEndPoint: EndPoint {
         case .uploadMaterial(_, _, _, _, let boundary):
             defaultHeaders["Authorization"] = "Bearer \(token)"
             defaultHeaders["Content-Type"] = "multipart/form-data; boundary=\(boundary)"
+        case .getMembers, .acceptMember, .declineMember:
+            defaultHeaders["Authorization"] = "Bearer \(token)"
+            defaultHeaders["Content-Type"] = "application/json"
         }
         return defaultHeaders
     }
     
     public var body: Data? {
         switch self {
-        case .getCourses:
+        case .getCourses, .getMembers:
             return nil
         case .createCourse(let request, _):
+            return try? JSONEncoder().encode(request)
+        case .acceptMember(let request), .declineMember(let request):
             return try? JSONEncoder().encode(request)
         case .uploadMaterial(let courseId, let fileData, let fileName, let mimeType, let boundary):
             return createMultipartBody(courseId: courseId, fileData: fileData, fileName: fileName, mimeType: mimeType, boundary: boundary)

@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import Common
 
 @MainActor
 public class TeamsViewModel: ObservableObject {
@@ -9,13 +10,16 @@ public class TeamsViewModel: ObservableObject {
     
     private let getTeamsUseCase: GetTeamsUseCase
     private let createTeamUseCase: CreateTeamUseCase
+    private let cloudinaryService: CloudinaryServiceProtocol
     
     nonisolated public init(
         getTeamsUseCase: GetTeamsUseCase,
-        createTeamUseCase: CreateTeamUseCase
+        createTeamUseCase: CreateTeamUseCase,
+        cloudinaryService: CloudinaryServiceProtocol
     ) {
         self.getTeamsUseCase = getTeamsUseCase
         self.createTeamUseCase = createTeamUseCase
+        self.cloudinaryService = cloudinaryService
     }
     
     public func fetchTeams() async {
@@ -31,9 +35,22 @@ public class TeamsViewModel: ObservableObject {
         self.isLoading = false
     }
     
-    public func createTeam(name: String, photoUrl: String, inviteCode: String) async -> Bool {
+    public func createTeam(name: String, photoData: Data?, inviteCode: String) async -> Bool {
         self.isLoading = true
         self.errorMessage = nil
+        
+        var photoUrl = ""
+        
+        if let data = photoData {
+            do {
+                photoUrl = try await cloudinaryService.uploadImage(imageData: data)
+            } catch {
+                self.errorMessage = "Failed to upload photo: \(error.localizedDescription)"
+                self.isLoading = false
+                return false
+            }
+        }
+        
         do {
             _ = try await createTeamUseCase.execute(
                 name: name,

@@ -188,6 +188,8 @@ public struct LoginView: View {
     }
 }
 
-#Preview {
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
     LoginView(viewModel: AuthViewModel(useCase: AuthUseCaseImpl(repository: OrganizationAuthRepositoryImpl(networkService: OrganizationAuthNetworkServiceImpl()))))
+}
 }

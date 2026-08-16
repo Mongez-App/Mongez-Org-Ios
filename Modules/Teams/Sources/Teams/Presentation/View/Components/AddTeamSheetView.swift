@@ -106,13 +106,12 @@ public struct AddTeamSheetView: View {
                     // Submit Button
                     Button(action: {
                         Task {
-                            // Dummy logic for uploading photo and getting URL could go here.
-                            // Passing empty or mock URL for now as requested.
-                            let photoUrl = selectedImage != nil ? "https://example.com/photo.png" : ""
+                            // Convert UIImage to Data for uploading
+                            let photoData = selectedImage?.jpegData(compressionQuality: 0.8)
                             
                             let success = await viewModel.createTeam(
                                 name: teamName,
-                                photoUrl: photoUrl,
+                                photoData: photoData,
                                 inviteCode: inviteCode
                             )
                             

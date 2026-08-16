@@ -75,7 +75,9 @@ public struct CustomTextField: View {
     }
 }
 
-#Preview {
+struct CustomTextField_Previews: PreviewProvider {
+    static var previews: some View {
     CustomTextField(title: "Email", placeholder: "Enter your email", text: .constant(""), icon: "envelope")
         .padding()
+}
 }

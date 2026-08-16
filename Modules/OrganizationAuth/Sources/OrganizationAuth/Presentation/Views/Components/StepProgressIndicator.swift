@@ -59,11 +59,13 @@ public struct StepProgressIndicator: View {
     }
 }
 
-#Preview {
+struct StepProgressIndicator_Previews: PreviewProvider {
+    static var previews: some View {
     VStack(spacing: 20) {
         StepProgressIndicator(currentStep: 1)
         StepProgressIndicator(currentStep: 3)
         StepProgressIndicator(currentStep: 5)
     }
     .padding()
+}
 }

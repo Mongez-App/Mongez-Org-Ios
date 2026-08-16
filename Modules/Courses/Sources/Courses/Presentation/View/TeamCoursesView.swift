@@ -11,13 +11,15 @@ import Common
 
 public struct TeamCoursesView: View {
     @ObservedObject var viewModel: TeamCoursesViewModel
+    @ObservedObject var eventsViewModel: EventsViewModel
     @ObservedObject var coordinator: TeamCoursesCoordinator
-    
+
     @State private var selectedTab: String = "Courses"
     @State private var searchText: String = ""
-    
-    public init(viewModel: TeamCoursesViewModel, coordinator: TeamCoursesCoordinator) {
+
+    public init(viewModel: TeamCoursesViewModel, eventsViewModel: EventsViewModel, coordinator: TeamCoursesCoordinator) {
         self.viewModel = viewModel
+        self.eventsViewModel = eventsViewModel
         self.coordinator = coordinator
     }
     
@@ -44,7 +46,12 @@ public struct TeamCoursesView: View {
                 
                 Spacer()
                 
-                Button(action: { coordinator.presentSheet(.addCourse) }) {
+                Button(action: {
+                    switch selectedTab {
+                    case "Events": coordinator.presentSheet(.addEvent)
+                    default: coordinator.presentSheet(.addCourse)
+                    }
+                }) {
                     Image(systemName: "plus")
                         .font(.system(size: 22, weight: .medium))
                         .foregroundColor(AppTheme.Colors.purple200)
@@ -100,9 +107,13 @@ public struct TeamCoursesView: View {
                     }
                 )
             case "Events":
-                EventsTabView()
+                EventsTabView(
+                    viewModel: eventsViewModel,
+                    courses: viewModel.courses,
+                    onAddEvent: { coordinator.presentSheet(.addEvent) }
+                )
             case "Members":
-                MembersTabView()
+                MembersTabView(viewModel: viewModel)
             default:
                 EmptyView()
             }
