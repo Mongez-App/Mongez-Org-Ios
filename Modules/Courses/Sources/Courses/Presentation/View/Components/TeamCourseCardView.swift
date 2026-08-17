@@ -18,15 +18,34 @@ public struct TeamCourseCardView: View {
     
     public var body: some View {
         HStack(spacing: AppTheme.Spacing.medium) {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(AppTheme.Colors.changeOpacity(color: AppTheme.Colors.purple200, opacity: 0.15))
-                .frame(width: 110, height: 110)
-                .overlay(
+            Group {
+                if let thumbnailUrl = course.thumbnailUrl, thumbnailUrl != "mock-url", let url = URL(string: thumbnailUrl) {
+                    AsyncImage(url: url) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .scaledToFill()
+                        case .failure:
+                            Text(course.initials)
+                                .font(AppTheme.textStyle(size: 34, weight: .bold))
+                                .foregroundColor(AppTheme.Colors.purple200)
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
+                } else {
                     Text(course.initials)
                         .font(AppTheme.textStyle(size: 34, weight: .bold))
                         .foregroundColor(AppTheme.Colors.purple200)
-                )
-
+                }
+            }
+            .frame(width: 110, height: 110)
+            .background(AppTheme.Colors.changeOpacity(color: AppTheme.Colors.purple200, opacity: 0.15))
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            
             VStack(alignment: .leading, spacing: 0) {
                 Text(course.title)
                     .font(AppTheme.textStyle(size: 20, weight: .bold))

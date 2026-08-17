@@ -11,6 +11,7 @@ public struct TeamCourse: Identifiable, Equatable {
     public let id: String
     public let title: String
     public let progress: Double
+    public let thumbnailUrl: String?
     
     public var initials: String {
         let words = title.split(separator: " ")
@@ -22,9 +23,10 @@ public struct TeamCourse: Identifiable, Equatable {
         return "TC"
     }
     
-    public init(id: String, title: String, progress: Double) {
+    public init(id: String, title: String, progress: Double, thumbnailUrl: String? = nil) {
         self.id = id
         self.title = title
         self.progress = progress
+        self.thumbnailUrl = thumbnailUrl
     }
 }
