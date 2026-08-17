@@ -25,13 +25,30 @@ public enum AppLanguage: String, CaseIterable, Identifiable {
 
 @MainActor
 public class ProfileViewModel: ObservableObject {
-    @Published public var organizationName: String = "Organization Name"
-    @Published public var organizationEmail: String = "myorganization@gmail.com"
+    @Published public var organizationName: String = ""
+    @Published public var photoUrl: String?
     @Published public var appearanceMode: AppearanceMode = .system
     @Published public var language: AppLanguage = .english
     @Published public var showLogoutConfirmation: Bool = false
 
-    public init() {}
+    @Published public var isLoading: Bool = false
+    @Published public var errorMessage: String?
+    @Published public var isEditProfilePresented: Bool = false
+    @Published public var isSavingProfile: Bool = false
+
+    private let getProfileUseCase: GetProfileUseCase
+    private let updateProfileUseCase: UpdateProfileUseCase
+    private let uploadProfilePhotoUseCase: UploadProfilePhotoUseCase
+
+    nonisolated public init(
+        getProfileUseCase: GetProfileUseCase,
+        updateProfileUseCase: UpdateProfileUseCase,
+        uploadProfilePhotoUseCase: UploadProfilePhotoUseCase
+    ) {
+        self.getProfileUseCase = getProfileUseCase
+        self.updateProfileUseCase = updateProfileUseCase
+        self.uploadProfilePhotoUseCase = uploadProfilePhotoUseCase
+    }
 
     public var initials: String {
         let words = organizationName.split(separator: " ")
@@ -41,6 +58,47 @@ public class ProfileViewModel: ObservableObject {
             return String(first.prefix(2)).uppercased()
         }
         return "OR"
+    }
+
+    public func loadProfile() async {
+        isLoading = true
+        errorMessage = nil
+        do {
+            let profile = try await getProfileUseCase.execute()
+            organizationName = profile.name
+            photoUrl = profile.photoUrl
+        } catch {
+            errorMessage = error.localizedDescription
+            print("Failed to load organization profile: \(error)")
+        }
+        isLoading = false
+    }
+
+    public func openEditProfile() {
+        isEditProfilePresented = true
+    }
+
+    public func cancelEditProfile() {
+        isEditProfilePresented = false
+    }
+
+    public func saveEditProfile(name: String, photoData: Data?) async {
+        isEditProfilePresented = false
+        isSavingProfile = true
+        errorMessage = nil
+        do {
+            var newPhotoUrl = photoUrl
+            if let photoData {
+                newPhotoUrl = try await uploadProfilePhotoUseCase.execute(fileData: photoData, fileName: "organization_photo.jpg")
+            }
+            let updated = try await updateProfileUseCase.execute(name: name, photoUrl: newPhotoUrl)
+            organizationName = updated.name
+            photoUrl = updated.photoUrl
+        } catch {
+            errorMessage = error.localizedDescription
+            print("Failed to save organization profile: \(error)")
+        }
+        isSavingProfile = false
     }
 
     public func confirmLogout() {

@@ -11,12 +11,14 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Common"),
+        .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0")
     ],
     targets: [
         .target(
             name: "Profile",
             dependencies: [
-                .product(name: "Common", package: "Common")
+                .product(name: "Common", package: "Common"),
+                .product(name: "Swinject-Dynamic", package: "Swinject")
             ]),
         .testTarget(
             name: "ProfileTests",
