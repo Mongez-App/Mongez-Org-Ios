@@ -10,8 +10,8 @@ public struct TeamCourseMaterialDTO: Decodable {
     public let id: String
     public let fileName: String
     public let fileType: String?
-    public let pageCount: Int
-    public let fileSizeMb: Double
+    public let pageCount: Int?
+    public let fileSizeMb: Double?
     public let fileUrl: String?
     public let uploadedAt: String?
     
@@ -20,8 +20,8 @@ public struct TeamCourseMaterialDTO: Decodable {
             id: id,
             fileName: fileName,
             fileType: fileType,
-            pageCount: pageCount,
-            fileSizeMb: fileSizeMb,
+            pageCount: pageCount ?? 0,
+            fileSizeMb: fileSizeMb ?? 0.0,
             fileUrl: fileUrl,
             uploadedAt: uploadedAt
         )

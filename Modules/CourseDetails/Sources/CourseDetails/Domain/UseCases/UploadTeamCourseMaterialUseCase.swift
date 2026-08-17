@@ -18,7 +18,11 @@ public class UploadTeamCourseMaterialUseCase {
     }
     
     public func execute(courseId: String, fileData: Data, fileName: String) async throws -> TeamCourseMaterial {
-        let _ = try await cloudinaryService.uploadPDF(fileData: fileData, fileName: fileName)
+        do {
+            let _ = try await cloudinaryService.uploadPDF(fileData: fileData, fileName: fileName)
+        } catch {
+            print("Warning: Cloudinary upload failed (\(error)), but proceeding with backend upload.")
+        }
     
         return try await repository.uploadMaterial(
             courseId: courseId,
