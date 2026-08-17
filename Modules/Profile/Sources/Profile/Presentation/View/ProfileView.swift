@@ -10,36 +10,55 @@ import SwiftUI
 import Common
 
 public struct ProfileView: View {
-    @StateObject private var viewModel = ProfileViewModel()
+    @StateObject private var viewModel: ProfileViewModel
 
-    public init() {}
+    public init(viewModel: ProfileViewModel) {
+        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     public var body: some View {
         ZStack {
             VStack(spacing: 0) {
                 VStack(spacing: AppTheme.Spacing.small) {
-                    Circle()
-                        .fill(AppTheme.Colors.changeOpacity(color: AppTheme.Colors.purple200, opacity: 0.15))
-                        .frame(width: 100, height: 100)
-                        .overlay(
-                            Circle()
-                                .stroke(AppTheme.Colors.purple200.opacity(0.4), lineWidth: 1.5)
-                        )
-                        .overlay(
-                            Text(viewModel.initials)
-                                .font(AppTheme.textStyle(size: 22, weight: .bold))
-                                .foregroundColor(AppTheme.Colors.purple200)
-                        )
+                    ZStack(alignment: .bottomTrailing) {
+                        Group {
+                            if let photoUrl = viewModel.photoUrl, !photoUrl.isEmpty, let url = URL(string: photoUrl) {
+                                AsyncImage(url: url) { phase in
+                                    switch phase {
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 100, height: 100)
+                                            .clipShape(Circle())
+                                    default:
+                                        avatarPlaceholder
+                                    }
+                                }
+                            } else {
+                                avatarPlaceholder
+                            }
+                        }
 
-                    VStack(spacing: AppTheme.Spacing.xxxSmall) {
-                        Text(viewModel.organizationName)
-                            .font(AppTheme.textStyle(size: 20, weight: .bold))
-                            .foregroundColor(AppTheme.Colors.black100)
+                        Button {
+                            viewModel.openEditProfile()
+                        } label: {
+                            ZStack {
+                                Circle()
+                                    .fill(AppTheme.Colors.purple200)
+                                    .frame(width: 28, height: 28)
 
-                        Text(viewModel.organizationEmail)
-                            .font(AppTheme.textStyle(size: 14))
-                            .foregroundColor(AppTheme.Colors.gray300)
+                                Image(systemName: "pencil")
+                                    .font(.system(size: 12, weight: .semibold))
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        .offset(x: 2, y: 2)
                     }
+
+                    Text(viewModel.organizationName)
+                        .font(AppTheme.textStyle(size: 20, weight: .bold))
+                        .foregroundColor(AppTheme.Colors.black100)
                 }
                 .padding(.top, AppTheme.Spacing.xLarge)
                 .padding(.bottom, AppTheme.Spacing.xLarge)
@@ -96,6 +115,11 @@ public struct ProfileView: View {
                 Spacer()
             }
 
+            if viewModel.isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: AppTheme.Colors.purple200))
+            }
+
             if viewModel.showLogoutConfirmation {
                 LogoutConfirmationView(
                     onLogout: { viewModel.confirmLogout() },
@@ -104,6 +128,41 @@ public struct ProfileView: View {
             }
         }
         .background(AppTheme.Colors.white100.ignoresSafeArea())
+        .onAppear {
+            Task {
+                await viewModel.loadProfile()
+            }
+        }
+        .sheet(isPresented: $viewModel.isEditProfilePresented) {
+            EditOrganizationProfileSheet(
+                currentName: viewModel.organizationName,
+                currentPhotoUrl: viewModel.photoUrl,
+                isSaving: viewModel.isSavingProfile,
+                onSave: { name, photoData in
+                    Task {
+                        await viewModel.saveEditProfile(name: name, photoData: photoData)
+                    }
+                },
+                onCancel: {
+                    viewModel.cancelEditProfile()
+                }
+            )
+        }
+    }
+
+    private var avatarPlaceholder: some View {
+        Circle()
+            .fill(AppTheme.Colors.changeOpacity(color: AppTheme.Colors.purple200, opacity: 0.15))
+            .frame(width: 100, height: 100)
+            .overlay(
+                Circle()
+                    .stroke(AppTheme.Colors.purple200.opacity(0.4), lineWidth: 1.5)
+            )
+            .overlay(
+                Text(viewModel.initials)
+                    .font(AppTheme.textStyle(size: 22, weight: .bold))
+                    .foregroundColor(AppTheme.Colors.purple200)
+            )
     }
 
     private var divider: some View {

@@ -13,6 +13,7 @@ import Swinject
 import Courses
 import OrganizationAuth
 import Teams
+import Profile
 
 public enum AppState {
     case splash
@@ -31,6 +32,7 @@ public final class AppCoordinator: ObservableObject, Coordinator {
         let container = Container()
         TeamCoursesAssembly().assemble(container: container)
         TeamsAssembly().assemble(container: container)
+        ProfileAssembly().assemble(container: container)
         
         container.register(OrganizationAuthRepository.self) { _ in
             let networkService = OrganizationAuthNetworkServiceImpl()

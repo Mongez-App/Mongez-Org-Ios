@@ -53,7 +53,11 @@ public struct AppCoordinatorView: View {
                             Text("Error Loading Teams")
                         }
                     case .profile:
-                        ProfileView()
+                        if let viewModel = coordinator.container.resolve(ProfileViewModel.self) {
+                            ProfileView(viewModel: viewModel)
+                        } else {
+                            Text("Error Loading Profile")
+                        }
                     }
                 }
             case .teamCourses:
