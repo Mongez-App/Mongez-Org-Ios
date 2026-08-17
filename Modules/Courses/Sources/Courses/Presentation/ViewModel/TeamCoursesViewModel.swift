@@ -55,7 +55,15 @@ public class TeamCoursesViewModel: ObservableObject {
         self.isLoading = true
         self.errorMessage = nil
         do {
-            self.courses = try await getCoursesUseCase.execute(teamId: teamId, organizationId: organizationId)
+            let fetchedCourses = try await getCoursesUseCase.execute(teamId: teamId, organizationId: organizationId)
+            let prefixToRemove = "\(organizationId)_"
+            self.courses = fetchedCourses.map { course in
+                if course.title.hasPrefix(prefixToRemove) {
+                    let cleanTitle = String(course.title.dropFirst(prefixToRemove.count))
+                    return TeamCourse(id: course.id, title: cleanTitle, progress: course.progress)
+                }
+                return course
+            }
         } catch {
             self.errorMessage = error.localizedDescription
             print("Fetch Courses Error: \(error)")
@@ -72,10 +80,11 @@ public class TeamCoursesViewModel: ObservableObject {
                 thumbnailUrl = try await cloudinaryService.uploadImage(imageData: jpegData)
             }
             
+            let injectedName = "\(organizationId)_\(name)"
             let courseId = try await createTeamCourseUseCase.execute(
                 teamId: teamId,
                 organizationId: organizationId,
-                name: name,
+                name: injectedName,
                 startDate: startDate,
                 endDate: endDate,
                 thumbnailUrl: thumbnailUrl,
