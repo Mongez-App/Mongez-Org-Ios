@@ -57,14 +57,15 @@ public class TeamCoursesViewModel: ObservableObject {
         do {
             let fetchedCourses = try await getCoursesUseCase.execute(teamId: teamId, organizationId: organizationId)
             let separator = "_$$$_"
-            self.courses = fetchedCourses.map { course in
-                let components = course.title.components(separatedBy: separator)
-                if components.count == 3 {
-                    let cleanTitle = components[2]
-                    let thumbnailUrl = components[1]
-                    return TeamCourse(id: course.id, title: cleanTitle, progress: course.progress, thumbnailUrl: thumbnailUrl)
-                } else if course.title.hasPrefix("\(organizationId)_") {
-                    let cleanTitle = String(course.title.dropFirst("\(organizationId)_".count))
+                        self.courses = fetchedCourses.map { course in
+                            let components = course.title.components(separatedBy: separator)
+                            if components.count == 3 {
+                                let cleanTitle = components[2]
+                                let thumbnailUrl = components[1]
+                                return TeamCourse(id: course.id, title: cleanTitle, progress: course.progress, thumbnailUrl: thumbnailUrl)
+                            } else if course.title.hasPrefix("\(organizationId)_") {
+                                let cleanTitle = String(course.title.dropFirst("\(organizationId)_".count))
+                                return TeamCourse(id: course.id, title: cleanTitle, progress: course.progress)
                     return TeamCourse(id: course.id, title: cleanTitle, progress: course.progress)
                 }
                 return course
@@ -85,6 +86,7 @@ public class TeamCoursesViewModel: ObservableObject {
                 thumbnailUrl = try await cloudinaryService.uploadImage(imageData: jpegData)
             }
             
+            let injectedName = "\(organizationId)_\(name)"
             let courseId = try await createTeamCourseUseCase.execute(
                 teamId: teamId,
                 organizationId: organizationId,
