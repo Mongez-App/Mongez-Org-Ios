@@ -88,7 +88,7 @@ public class TeamCoursesViewModel: ObservableObject {
             let courseId = try await createTeamCourseUseCase.execute(
                 teamId: teamId,
                 organizationId: organizationId,
-                name: "\(organizationId)_$$$_\(thumbnailUrl)_$$$_\(name)",
+                name: name,
                 startDate: startDate,
                 endDate: endDate,
                 thumbnailUrl: thumbnailUrl,
