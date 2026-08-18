@@ -11,8 +11,10 @@ public struct TeamCourseDTO: Decodable {
     public let id: String
     public let name: String
     public let progress: Double
+    public let thumbnailUrl: String?
+    public let photoUrl: String?
     
     func toDomain() -> TeamCourse {
-        return TeamCourse(id: id, title: name, progress: progress)
+        return TeamCourse(id: id, title: name, progress: progress, thumbnailUrl: thumbnailUrl ?? photoUrl)
     }
 }

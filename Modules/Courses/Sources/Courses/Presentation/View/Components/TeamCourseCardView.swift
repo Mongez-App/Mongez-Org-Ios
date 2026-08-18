@@ -19,7 +19,9 @@ public struct TeamCourseCardView: View {
     public var body: some View {
         HStack(spacing: AppTheme.Spacing.medium) {
             Group {
-                if let thumbnailUrl = course.thumbnailUrl, thumbnailUrl != "mock-url", let url = URL(string: thumbnailUrl) {
+                if let thumbnailUrl = course.thumbnailUrl, 
+                   thumbnailUrl != "mock-url", 
+                   let url = URL(string: thumbnailUrl.trimmingCharacters(in: .whitespacesAndNewlines)) {
                     AsyncImage(url: url) { phase in
                         switch phase {
                         case .empty:
