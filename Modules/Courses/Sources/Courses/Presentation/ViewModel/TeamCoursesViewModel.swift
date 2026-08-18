@@ -55,7 +55,20 @@ public class TeamCoursesViewModel: ObservableObject {
         self.isLoading = true
         self.errorMessage = nil
         do {
-            self.courses = try await getCoursesUseCase.execute(teamId: teamId, organizationId: organizationId)
+            let fetchedCourses = try await getCoursesUseCase.execute(teamId: teamId, organizationId: organizationId)
+            let separator = "_$$$_"
+            self.courses = fetchedCourses.map { course in
+                let components = course.title.components(separatedBy: separator)
+                if components.count == 3 {
+                    let cleanTitle = components[2]
+                    let thumbnailUrl = components[1]
+                    return TeamCourse(id: course.id, title: cleanTitle, progress: course.progress, thumbnailUrl: thumbnailUrl)
+                } else if course.title.hasPrefix("\(organizationId)_") {
+                    let cleanTitle = String(course.title.dropFirst("\(organizationId)_".count))
+                    return TeamCourse(id: course.id, title: cleanTitle, progress: course.progress)
+                }
+                return course
+            }
         } catch {
             self.errorMessage = error.localizedDescription
             print("Fetch Courses Error: \(error)")
@@ -75,7 +88,7 @@ public class TeamCoursesViewModel: ObservableObject {
             let courseId = try await createTeamCourseUseCase.execute(
                 teamId: teamId,
                 organizationId: organizationId,
-                name: name,
+                name: "\(organizationId)_$$$_\(thumbnailUrl)_$$$_\(name)",
                 startDate: startDate,
                 endDate: endDate,
                 thumbnailUrl: thumbnailUrl,
